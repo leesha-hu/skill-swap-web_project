@@ -1,5 +1,5 @@
 const db = require('../db/connection.js');
-const bcrypt = require('bcryptjs');
+const bcryptjs = require('bcryptjs'); // module for password encryption
 
 // function to signup new user 
 const signupUser = async (req, res) => {
@@ -43,7 +43,7 @@ const signupUser = async (req, res) => {
             }
 
             // password hashing
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const hashedPassword = await bcryptjs.hash(password, 10);
 
             // insert into database
             await db.query('insert into users (name,email,phone,password,address,latitude,longitude) values (?,?,?,?,?,?,?)', [name, email, phone, hashedPassword, address, latitude, longitude]);

@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./route.js');
 
-//create instance of express application
+// create instance of express application
 const app = express();
 
 // middleware
