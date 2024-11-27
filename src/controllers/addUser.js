@@ -8,9 +8,12 @@ const signupUser = async (req, res) => {
     const email = req.body.email;
     const phone = req.body.phone;
     const password = req.body.password;
+    const address = req.body.address;
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
 
     // check if all input is available
-    if (!name || !email || !phone || !password) {
+    if (!name || !email || !phone || !password || !address || !latitude || !longitude) {
         return res.status(400).json({ message: 'Fill all details!' });
     }
     // check if name has atleast 3 characters
@@ -43,7 +46,7 @@ const signupUser = async (req, res) => {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             // insert into database
-            await db.query('insert into users (name,email,phone,password) values (?,?,?,?)', [name, email, phone, hashedPassword]);
+            await db.query('insert into users (name,email,phone,password,address,latitude,longitude) values (?,?,?,?,?,?,?)', [name, email, phone, hashedPassword, address, latitude, longitude]);
 
             return res.status(201).json({ message: 'Registration successful' });
 
