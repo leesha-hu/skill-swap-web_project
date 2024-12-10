@@ -8,7 +8,7 @@ const { deleteSkill } = require('../controllers/skill_controllers/deleteSkill.js
 const { getCatSkills } = require('../controllers/skill_controllers/getCategorySkills.js');
 const { getUserSkills } = require('../controllers/skill_controllers/getUserSkills.js');
 
-router.get('/:categoryId', getCatSkills);
+router.get('/:categoryName', getCatSkills);
 router.get('/user/:userId', getUserSkills);
 router.get('/', getSkills);
 router.post('/', addSkill);
