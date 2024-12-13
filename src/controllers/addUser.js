@@ -14,15 +14,15 @@ const signupUser = async (req, res) => {
 
     // check if all input is available
     if (!name || !email || !phone || !password || !address || !latitude || !longitude) {
-        return res.status(400).json({ message: 'Fill all details!' });
+        return res.status(400).json({ error: 'Fill all details!' });
     }
     // check if name has atleast 3 characters
     else if (!name.match(/(?=.*[a-zA-Z0-9]{3,}).*$/g)) {
-        return res.status(400).json({ message: 'Name should be at least 3 chars long' });
+        return res.status(400).json({ error: 'Name should be at least 3 chars long' });
     }
     // email validation 
     else if (!email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
-        return res.status(400).json({ message: 'Invalid email' });
+        return res.status(400).json({ error: 'Invalid email' });
     }
     // phone number validation
     else if (!phone.match(/[0-9]{10}$/g)) {
@@ -30,7 +30,7 @@ const signupUser = async (req, res) => {
     }
     // check if password contains at least 8 characters and includes a special character 
     else if (!password.match(/^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)) {
-        return res.status(400).json({ message: 'Invalid password... password must contain at least 8 characters and at least one special character' });
+        return res.status(400).json({ error: 'Invalid password... password must contain at least 8 characters and at least one special character' });
     }
 
     else {
@@ -39,7 +39,7 @@ const signupUser = async (req, res) => {
             // check if email already exists 
             const [user] = await db.query('select * from users where email=?', [email]);
             if (user.length > 0) {
-                return res.status(400).json({ message: 'email already registered' });
+                return res.status(400).json({ error: 'email already registered' });
             }
 
             // password hashing
@@ -48,11 +48,12 @@ const signupUser = async (req, res) => {
             // insert into database
             await db.query('insert into users (name,email,phone,password,address,latitude,longitude) values (?,?,?,?,?,?,?)', [name, email, phone, hashedPassword, address, latitude, longitude]);
 
-            return res.status(201).json({ message: 'Registration successful' });
+            // return response with redirection
+            return res.status(200).json({ success: true, redirect: "/views/home_page.html"});
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Server error' });
+            res.status(500).json({ error: 'Server error' });
         }
     }
 }
