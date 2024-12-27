@@ -12,7 +12,7 @@ const getParticipatingClasses = async (req, res) => {
         // get class id's from object to array
         const classIds = classid.map(obj => obj.class_id);
         // get class information the user is participating in 
-        const [classes] = await db.query('select s.name,c.start_time,c.end_time,c.date from class_timings c join skills s on s.skill_id=c.skill_id where class_id in (?)', [classIds]);
+        const [classes] = await db.query('select s.name,c.start_time,c.end_time,c.date,u.name as teacher ,u.address from class_timings c join skills s on s.skill_id=c.skill_id join users u on s.user_id=u.user_id where class_id in (?)', [classIds]);
         return res.json({ message: 'successful', classes: classes });
     } catch (error) {
         console.log(error);
