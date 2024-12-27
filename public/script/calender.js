@@ -21,43 +21,69 @@ function getMonthNumber(monthName) {
 }
 
 // function to fetch classes the user is teaching
-function getClassDates() {
-  const userId = 1; //need to delete and update this logic
+async function getClassDates() {
+  // const userId = 1; //need to delete and update this logic
 
-  // fetch from server 
-  return fetch(`http://localhost:2000/class/${userId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
+  try {
+    const userResponse = await fetch("/getUser/uid");
+    if (!userResponse.ok) {
+      throw new Error("Not logged in");
+    }
+    const userData = await userResponse.json();
 
-      return response.json();
-    })
-    .then(data => {
+    // fetch from server 
+    return fetch(`http://localhost:2000/class/${userData.userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
 
-      return data.classes;
-    })// error catching
-    .catch(error => {
-      console.error('Error fetching class details:', error);
-      return [];
-    });
+        return response.json();
+      })
+      .then(data => {
+
+        return data.classes;
+      })// error catching
+      .catch(error => {
+        console.error('Error fetching class details:', error);
+        return [];
+      });
+  } catch (error) {
+    console.error("Error fetching class details:", error);
+    return [];
+  }
+
 }
 
 // fuction to fetch the classes the user is participating in 
-function getParticipatingClasses() {
-  const userId = 1;// delete this later
+async function getParticipatingClasses() {
+  // const userId = 1;// delete this later
 
-  // fetch from server 
-  return fetch(`http://localhost:2000/participant/${userId}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      return data.classes;
-    })
+  try {
+    const userResponse = await fetch("/getUser/uid");
+    if (!userResponse.ok) {
+      throw new Error("Not logged in");
+    }
+    const userData = await userResponse.json();
+
+
+    // fetch from server 
+    return fetch(`http://localhost:2000/participant/${userData.userId}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        return data.classes;
+      })
+  } catch (error) {
+    console.error("Error fetching class details:", error);
+    return [];
+  }
+
+
 }
 
 // function to render calender 
@@ -77,8 +103,8 @@ async function renderCalendar() {
   daysElement.innerHTML = '';
 
   // call fuctions to get classes of the user 
-  const classes = await getClassDates();
-  const participating = await getParticipatingClasses();
+  const classes = (await getClassDates()) || [];
+  const participating = (await getParticipatingClasses()) || [];
 
   // Add empty cells for days before the 1st
   for (let i = 0; i < firstDayIndex; i++) {
