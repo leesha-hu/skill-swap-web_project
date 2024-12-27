@@ -49,7 +49,7 @@ const signupUser = async (req, res) => {
             await db.query('insert into users (name,email,phone,password,address,latitude,longitude) values (?,?,?,?,?,?,?)', [name, email, phone, hashedPassword, address, latitude, longitude]);
 
             // return response with redirection
-            return res.status(200).json({ success: true, redirect: "/views/home_page.html"});
+            return res.status(200).json({ success: true, redirect: "/views/welcome_page.html" });
 
         } catch (error) {
             console.error(error);
