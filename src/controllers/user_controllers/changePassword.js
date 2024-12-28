@@ -20,7 +20,11 @@ const changePassword = async (req, res) => {
         const isMatch = await bcryptjs.compare(currentPassword, hashedPassword);
 
         if (!isMatch) {
-            return res.json({ message: 'incorrect password' })
+            return res.status(400).json({ error: 'incorrect password' })
+        }
+
+        if (!password.match(/^(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/)) {
+            return res.status(400).json({ error: 'Invalid password... password must contain at least 8 characters and at least one special character' });
         }
 
         // password hashing

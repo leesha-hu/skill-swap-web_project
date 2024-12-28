@@ -4,6 +4,10 @@ const changePhone = async (req, res) => {
     const uid = req.session.userId;
     const phone = req.body.inputPhone;
 
+    if (!phone.match(/[0-9]{10}$/g)) {
+        return res.status(400).json({ error: 'Invalid phone number' });
+    }
+
     try {
         await db.query('update users set phone=? where user_id=?', [phone, uid]);
         return res.status(200).json({ message: 'successfully updated' });

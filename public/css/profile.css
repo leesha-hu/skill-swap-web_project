@@ -166,3 +166,9 @@ header button {
     background-color: rgb(194, 248, 174);
     border: 1px solid rgb(133, 185, 91);
 }
+
+.error{
+    color: red;
+    background-color: rgb(248, 174, 174);
+    border: 1px solid rgb(185, 91, 91);
+}

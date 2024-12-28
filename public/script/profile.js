@@ -51,8 +51,6 @@ const nameForm = document.getElementById('nameForm');
 nameForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-
-
     const name = document.querySelector('input[name="inputName"]');
     const formData = new FormData(nameForm);
     const data = Object.fromEntries(formData.entries());
@@ -72,14 +70,24 @@ nameForm.addEventListener("submit", async (event) => {
             if (response.ok) {
                 console.log('update successful');
                 name1.style.display = 'none';
-
+                
                 loadProfile();
                 message.textContent = 'Name successfully updated';
+                if(message.classList.contains('error')){
+                    message.classList.remove('error');
+                }
                 message.classList.add('success');
                 message.style.display = 'block';
 
             } else {
                 console.log('update unsuccessful');
+                name1.style.display = 'none';
+                message.textContent = `Unsuccessful...${result.error}`;
+                if(message.classList.contains('success')){
+                    message.classList.remove('success');
+                }
+                message.classList.add('error');
+                message.style.display = 'block';
             }
         } catch (error) {
             console.log(error);
@@ -112,12 +120,22 @@ phoneForm.addEventListener("submit", async (event) => {
                 phone1.style.display = 'none';
 
                 loadProfile();
+                if(message.classList.contains('error')){
+                    message.classList.remove('error');
+                }
                 message.textContent = 'Phone number successfully updated';
                 message.classList.add('success');
                 message.style.display = 'block';
 
             } else {
                 console.log('update unsuccessful');
+                phone1.style.display = 'none';
+                message.textContent = `Unsuccessful...${result.error}`;
+                if(message.classList.contains('success')){
+                    message.classList.remove('success');
+                }
+                message.classList.add('error');
+                message.style.display = 'block';
             }
         } catch (error) {
             console.log(error);
@@ -148,11 +166,21 @@ addressForm.addEventListener("submit", async (event) => {
 
             loadProfile();
             message.textContent = 'Address successfully updated';
+            if(message.classList.contains('error')){
+                message.classList.remove('error');
+            }
             message.classList.add('success');
             message.style.display = 'block';
 
         } else {
             console.log('update unsuccessful');
+            addr1.style.display = 'none';
+                message.textContent = `Unsuccessful...${result.error}`;
+                if(message.classList.contains('success')){
+                    message.classList.remove('success');
+                }
+                message.classList.add('error');
+                message.style.display = 'block';
         }
     } catch (error) {
         console.log(error);
@@ -187,11 +215,21 @@ passwordForm.addEventListener("submit", async (event) => {
 
                 loadProfile();
                 message.textContent = 'Password successfully updated';
+                if(message.classList.contains('error')){
+                    message.classList.remove('error');
+                }
                 message.classList.add('success');
                 message.style.display = 'block';
 
             } else {
                 console.log('update unsuccessful');
+                pass1.style.display = 'none';
+                message.textContent = `Unsuccessful...${result.error}`;
+                if(message.classList.contains('success')){
+                    message.classList.remove('success');
+                }
+                message.classList.add('error');
+                message.style.display = 'block';
             }
         } catch (error) {
             console.log(error);
