@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EH - Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+
+<body>
+    <div id="Message">message</div>
+    <header>
+        <div class="logo">
+
+            <img class="image1" src="../images/empowerhub-logo.png" alt="logo">
+        </div>
+        <h1>User profile Page</h1>
+        <button id="bt1">Edit details</button>
+    </header>
+    <div class="main">
+        <div class="main2">
+            <p id="user_name"> Name:leesha</p>
+            <p id="user_phone"> Phone Number:90861752</p>
+            <p id="user_email"> email:kjghta@gmail.com</p>
+            <p id="user_address"> Address:something uru </p>
+        </div>
+    </div>
+    <div class="show1" id="sh1">
+        <div class="show">
+            <button class="change" id="name">Change your Name</button>
+            <button class="change" id="phone">Change your Phone number</button>
+            <button class="change" id="address">Change your Address</button>
+            <button class="change" id="pass">Change your password</button>
+        </div>
+    </div>
+    <div id="name1" class="changename1">
+        <div class="changename">
+            <h2>Edit Your Name</h2>
+            <form action="/getUser/name" id="nameForm">
+                <p>Enter your correct name</p>
+                <input name='inputName' type="text" placeholder="Name" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div id="phone1" class="changename1">
+        <div class="changename">
+            <h2>Edit Your Phone Number</h2>
+            <form action="/register">
+                <p>Enter your Phone Number</p>
+                <input type="text" placeholder="phone number" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div id="addr1" class="changename1">
+        <div class="changename">
+            <h2>Edit Your Address </h2>
+            <form action="/register" class="add_form">
+                <p>Enter your correct Address</p>
+                <!-- <input type="text" placeholder="Address" required> -->
+                <textarea id="address" name="address" rows="4" cols="45" placeholder="Enter your full address here..."
+                    required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <div id="pass1" class="changename1">
+        <div class="changename">
+            <h2>Edit Your Password </h2>
+            <form action="/register">
+                <p>Enter your current password</p>
+                <input type="password" placeholder=" current password" required>
+                <p>Enter your new password</p>
+                <input type="password" placeholder=" new password" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+<script src="../script/profile.js"></script>
+
+</html>
