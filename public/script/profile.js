@@ -125,4 +125,39 @@ phoneForm.addEventListener("submit", async (event) => {
     }
 })
 
+const addressForm = document.getElementById('addressForm');
+addressForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(addressForm);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+
+        const response = await fetch(addressForm.action, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            console.log('update successful');
+            addr1.style.display = 'none';
+
+            loadProfile();
+            message.textContent = 'Address successfully updated';
+            message.classList.add('success');
+            message.style.display = 'block';
+
+        } else {
+            console.log('update unsuccessful');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
 window.onload = loadProfile
