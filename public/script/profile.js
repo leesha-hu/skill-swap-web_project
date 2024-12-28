@@ -87,4 +87,42 @@ nameForm.addEventListener("submit", async (event) => {
     }
 })
 
+const phoneForm = document.getElementById('phoneForm');
+phoneForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const phone = document.querySelector('input[name="inputPhone"]');
+    const formData = new FormData(phoneForm);
+    const data = Object.fromEntries(formData.entries());
+    if (!phone) {
+        console.log("Enter name");
+    } else {
+        try {
+
+            const response = await fetch(phoneForm.action, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                console.log('update successful');
+                phone1.style.display = 'none';
+
+                loadProfile();
+                message.textContent = 'Phone number successfully updated';
+                message.classList.add('success');
+                message.style.display = 'block';
+
+            } else {
+                console.log('update unsuccessful');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+})
+
 window.onload = loadProfile
