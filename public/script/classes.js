@@ -62,15 +62,25 @@ window.onload = async function () {
         const newbut = document.createElement("button");
         newbut.classList.add("cancel");
         newbut.innerText = "Cancel Skill"; // Optional: set button text
+        // Add the class ID as a data attribute to the button
+        newbut.setAttribute("data-id", element.class_id);
+
         // Add the onclick event to the cancel button
         newbut.onclick = async () => {
             let ans = confirm("Are you sure you want to cancel this class?");
             if (ans) {
-                // Remove the class from the DOM
-                container.removeChild(newDiv);
+                // Get the class ID from the button's data-id attribute
+                const classId = newbut.dataset.id;
 
                 // Optionally, delete from backend (send DELETE request)
-                await deleteClass(element.skill_name); // Assuming skill_name is unique for identification
+                const response = await fetch(`/participant/${classId}`, { method: 'DELETE' }); // Assuming skill_name is unique for identification
+                const result = await response.json();
+                if (response.ok) {
+                    // Remove the class from the DOM
+                    container.removeChild(newDiv);
+                }else{
+                    console.log("unsuccessful");
+                }
             }
         };
         newDiv.appendChild(newbut);
