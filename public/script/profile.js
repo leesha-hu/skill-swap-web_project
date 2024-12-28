@@ -160,4 +160,43 @@ addressForm.addEventListener("submit", async (event) => {
 
 })
 
+const passwordForm = document.getElementById('passwordForm');
+passwordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const password = document.querySelector('input[name="inputPassword"]');
+    const currentPassword = document.querySelector('input[name="inputCurrentPassword"]');
+    const formData = new FormData(passwordForm);
+    const data = Object.fromEntries(formData.entries());
+    if (!password || !currentPassword) {
+        console.log("Enter add details");
+    } else {
+        try {
+
+            const response = await fetch(passwordForm.action, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                console.log('update successful');
+                pass1.style.display = 'none';
+
+                loadProfile();
+                message.textContent = 'Password successfully updated';
+                message.classList.add('success');
+                message.style.display = 'block';
+
+            } else {
+                console.log('update unsuccessful');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+})
+
 window.onload = loadProfile

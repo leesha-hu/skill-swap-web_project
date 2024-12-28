@@ -69,11 +69,11 @@
     <div id="pass1" class="changename1">
         <div class="changename">
             <h2>Edit Your Password </h2>
-            <form action="/register">
+            <form action="/getUser/password" id="passwordForm">
                 <p>Enter your current password</p>
-                <input type="password" placeholder=" current password" required>
+                <input name="inputCurrentPassword" type="password" placeholder=" current password" required>
                 <p>Enter your new password</p>
-                <input type="password" placeholder=" new password" required>
+                <input name="inputPassword" type="password" placeholder=" new password" required>
                 <button type="submit">Submit</button>
             </form>
         </div>
