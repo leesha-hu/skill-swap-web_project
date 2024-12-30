@@ -6,7 +6,7 @@ const { getParticipatingClasses } = require('../controllers/participant_controll
 const { deleteParticipant } = require('../controllers/participant_controllers/delete_participant.js');
 
 router.post('/:userId/:classId', enrollParticipant);
-router.get('/:userId', getParticipatingClasses);
+router.get('/', getParticipatingClasses);
 router.delete('/:classId', deleteParticipant)
 
 module.exports = router;

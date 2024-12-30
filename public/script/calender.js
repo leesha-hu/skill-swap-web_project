@@ -20,19 +20,17 @@ function getMonthNumber(monthName) {
   return index === -1 ? null : index;
 }
 
+// cache to store the recieved data from server 
+let classCache = null;
+let participantCache = null;
+
 // function to fetch classes the user is teaching
 async function getClassDates() {
-  // const userId = 1; //need to delete and update this logic
-
+  if (classCache) return classCache; // Use cached data if available
   try {
-    const userResponse = await fetch("/getUser/uid");
-    if (!userResponse.ok) {
-      throw new Error("Not logged in");
-    }
-    const userData = await userResponse.json();
 
     // fetch from server 
-    return fetch(`http://localhost:2000/class/${userData.userId}`)
+    return fetch(`http://localhost:2000/class/`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
@@ -41,7 +39,7 @@ async function getClassDates() {
         return response.json();
       })
       .then(data => {
-
+        classCache = data.classes; // Cache the data
         return data.classes;
       })// error catching
       .catch(error => {
@@ -57,18 +55,11 @@ async function getClassDates() {
 
 // fuction to fetch the classes the user is participating in 
 async function getParticipatingClasses() {
-  // const userId = 1;// delete this later
-
+  if (participantCache) return participantCache; // Use cached data if available
   try {
-    const userResponse = await fetch("/getUser/uid");
-    if (!userResponse.ok) {
-      throw new Error("Not logged in");
-    }
-    const userData = await userResponse.json();
-
 
     // fetch from server 
-    return fetch(`http://localhost:2000/participant/${userData.userId}`)
+    return fetch(`http://localhost:2000/participant/`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
@@ -76,6 +67,7 @@ async function getParticipatingClasses() {
         return response.json();
       })
       .then(data => {
+        participantCache = data.classes; // Cache the data
         return data.classes;
       })
   } catch (error) {
@@ -167,14 +159,12 @@ async function getClasses(sel_date, month, year) {
   // filter teaching classes 
   const today = teach.filter(cls => {
     const date = new Date(cls.date);
-    console.log(date.getMonth() === month)
     return date.getDate() === sel_date && date.getMonth() === month && date.getFullYear() === year;
   })
 
   // filter participating classes 
   const ptoday = learn.filter(cls => {
     const date = new Date(cls.date);
-    console.log(date.getMonth() === month)
     return date.getDate() === sel_date && date.getMonth() === month && date.getFullYear() === year;
   })
 

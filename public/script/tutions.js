@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             button.addEventListener("click", (event) => {
                 const timingDiv = event.target.closest(".times");
                 if (timingDiv) {
-                    const ans = alert("are you sure u want to delete tution");
+                    const ans = confirm("are you sure u want to delete tution");
                     if (ans) {
                         timingDiv.remove();
                         console.log("Tuition timing removed.");

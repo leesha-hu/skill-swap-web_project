@@ -7,6 +7,6 @@ const { getUserClasses } = require('../controllers/class_controllers/getUserClas
 
 router.post('/', addClass);
 router.delete('/:classId', deleteClass);
-router.get('/:userId', getUserClasses)
+router.get('/', getUserClasses)
 
 module.exports = router;

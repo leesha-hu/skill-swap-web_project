@@ -1,13 +1,13 @@
 const db = require('../../db/connection.js');
 
 const getParticipatingClasses = async (req, res) => {
-    const uid = req.params.userId;
+    const uid = req.session.userId;
 
     try {
         // get class id's of the classes the user is participating in 
         const [classid] = await db.query('select class_id from participants where user_id=?', [uid]);
         if (classid.length === 0) {
-            return res.json({ message: 'no classes found' });
+            return res.json({ message: 'no classes found',classes:[] });
         }
         // get class id's from object to array
         const classIds = classid.map(obj => obj.class_id);
