@@ -32,9 +32,3 @@ const getSkills = async (req, res) => {
 }
 
 module.exports = { getSkills };
-
-// function toRadians(degrees) {
-//     return degrees * (Math.PI / 180);
-// }
-
-// console.log((6371 * Math.acos(Math.cos(toRadians(latitude)) * Math.cos(toRadians(57.34)) * Math.cos(toRadians(23.89) - toRadians(longitude)) +Math.sin(toRadians(latitude)) * Math.sin(toRadians(57.34)))))

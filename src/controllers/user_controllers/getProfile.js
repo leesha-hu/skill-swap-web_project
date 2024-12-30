@@ -2,11 +2,13 @@ const db = require('../../db/connection.js')
 
 const getProfile = async (req, res) => {
     const uid = req.session.userId;
+    // check if session details are present 
     if (!uid) {
         console.log('not logged in!');
         return res.json({ message: 'not logged in!' });
     }
     try {
+        // get the details of the user 
         const rows = await db.query('select name,address,email,phone from users where user_id=?', [uid]);
         if (rows.length == 0) {
             return res.json({ message: 'user not found' })
