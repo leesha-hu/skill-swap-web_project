@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const timings = await getTimings(classes[element].skill_id);
             time.push(timings);
         }
-        console.log(time);
+
         if (classes.length > 0) {
             classes.forEach((element, index) => {
                 const skillDiv = document.createElement('div');
@@ -44,12 +44,20 @@ document.addEventListener("DOMContentLoaded", function () {
                         timingDiv.classList.add("times");
                         const date = new Date(timeSlot.date);
                         const onlyDate = date.toISOString().split('T')[0];
+                        // const cancelBtn = document.createElement('button');
+                        // cancelBtn.classList.add('but cancel');
+                        // cancelBtn.innerText = 'Cancel Tuition'
+                        
+                        // const viewBtn = document.createElement('button');
+                        // viewBtn.classList.add('but view');
+                        // viewBtn.innerText = 'View Students'
+                        
                         timingDiv.innerHTML = `
                         <p>Date: ${onlyDate}</p>
                         <p>Timings: ${timeSlot.start_time} - ${timeSlot.end_time}</p>
                         <div class="button-container">
-                            <button class="but cancel">Cancel Tuition</button>
-                            <button class="but view">View Students</button>
+                            <button class="but cancel">Cancel Tution</button>
+                            <button class="but view">View Students</button>                           
                         </div>
                     `;
                         skillDiv.querySelector(".timings").appendChild(timingDiv);

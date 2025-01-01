@@ -3,7 +3,7 @@ const db = require('../../db/connection.js'); // database connection
 const addSkill = async (req, res) => {
     const sname = req.body.name;
     const description = req.body.description;
-    const uid = req.body.uid;
+    const uid = req.session.userId;
     const cid = req.body.cid;
 
     if (!sname || !uid || !cid) {
@@ -24,7 +24,7 @@ const addSkill = async (req, res) => {
 
             // insert into database
             await db.query('insert into skills (user_id,cat_id,name,description)values (?,?,?,?)', [uid, cid, sname, description]);
-            return res.status(201).json({ status: 'success', message: 'skill added successfully' });
+            return res.status(200).json({ message: 'skill added successfully', success: true, redirect: '/views/tutions.html' });
         } catch (error) {
             console.error(error);
             res.status(500).json({ status: 'error', message: 'Server error' });
