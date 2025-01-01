@@ -44,13 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         timingDiv.classList.add("times");
                         const date = new Date(timeSlot.date);
                         const onlyDate = date.toISOString().split('T')[0];
-                        // const cancelBtn = document.createElement('button');
-                        // cancelBtn.classList.add('but cancel');
-                        // cancelBtn.innerText = 'Cancel Tuition'
-                        
-                        // const viewBtn = document.createElement('button');
-                        // viewBtn.classList.add('but view');
-                        // viewBtn.innerText = 'View Students'
                         
                         timingDiv.innerHTML = `
                         <p>Date: ${onlyDate}</p>
@@ -101,11 +94,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.querySelectorAll(".view").forEach(button => {
             button.addEventListener("click", (event) => {
+                const classId=button.getAttribute("classId");
                 const timingDiv = event.target.closest(".times");
                 const date = timingDiv.querySelector("p:first-child").innerText.replace("Date: ", "");
                 const skillDiv = event.target.closest(".sub");
                 const skillName = skillDiv.querySelector("h2").innerText.replace("Skill Name: ", "");
-                window.location.href = `leeproject/getstudent.html?skillname=${encodeURIComponent(skillName)}&date=${encodeURIComponent(date)}`;
+                window.location.href = `/views/view_students.html?classId=${encodeURIComponent(classId)}&date=${encodeURIComponent(date)}&skillName=${encodeURIComponent(skillName)}`;
             });
         });
     }
