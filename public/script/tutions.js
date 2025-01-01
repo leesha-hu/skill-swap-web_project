@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p>Date: ${onlyDate}</p>
                         <p>Timings: ${timeSlot.start_time} - ${timeSlot.end_time}</p>
                         <div class="button-container">
-                            <button class="but cancel">Cancel Tution</button>
-                            <button class="but view">View Students</button>                           
+                            <button class="but cancel" classId="${timeSlot.class_id}">Cancel Tution</button>
+                            <button class="but view" classId="${timeSlot.class_id}">View Students</button>                           
                         </div>
                     `;
                         skillDiv.querySelector(".timings").appendChild(timingDiv);
@@ -73,13 +73,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function attachListeners() {
         document.querySelectorAll(".cancel").forEach(button => {
-            button.addEventListener("click", (event) => {
+            button.addEventListener("click", async(event) => {
                 const timingDiv = event.target.closest(".times");
                 if (timingDiv) {
                     const ans = confirm("are you sure u want to delete tution");
                     if (ans) {
-                        timingDiv.remove();
-                        console.log("Tuition timing removed.");
+                        classId=button.getAttribute('classId');
+                        try{
+                            const response=await fetch(`/class/${classId}`,{method:"DELETE"})
+                            const result=await response.json();
+                            if(response.ok){
+                                if(result.success){
+                                    timingDiv.remove();
+                                    console.log("Tuition timing removed.");
+                                }else{
+                                    console.log(result.message);
+                                }
+                            }
+                        }catch(error){
+                            console.log(error);
+                        }
+                        
                     }
                 }
             });

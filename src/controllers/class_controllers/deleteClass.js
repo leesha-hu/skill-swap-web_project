@@ -12,7 +12,7 @@ const deleteClass = async (req, res) => {
 
         // delete the class 
         await db.query('delete from class_timings where class_id=?', [classId]);
-        return res.json({ message: 'deleted successfully' });
+        return res.json({ message: 'deleted successfully', success: true });
     } catch (error) {
         console.log(error);
         return res.json({ message: 'Server error' });
