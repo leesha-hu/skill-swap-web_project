@@ -1,23 +1,23 @@
-const db=require('../../db/connection.js');
+const db = require('../../db/connection.js');
 
-const addClass=async (req,res)=>{
-    const skillId=req.body.skillId;
-    const start=req.body.startTime;
-    const end=req.body.endTime;
-    const date=req.body.date;
+const addClass = async (req, res) => {
+    const skillId = req.body.skillId;
+    const start = req.body.startTime;
+    const end = req.body.endTime;
+    const date = req.body.date;
 
     // check if input timings are valid
-    if(end<=start){
-        return res.json({message:'Invalid timings'});
+    if (end <= start) {
+        return res.json({ message: 'Invalid timings' });
     }
 
-    try{
+    try {
         // get userid of the class being added
-        const [user]=await db.query('select user_id from skills where skill_id=?',[skillId]);
-        const uid=user[0].user_id;
+        const [user] = await db.query('select user_id from skills where skill_id=?', [skillId]);
+        const uid = user[0].user_id;
         // get all skills that the user is engaging
-        const [skills]=await db.query('select skill_id from skills where user_id=?',[uid]);
-        const skillIds=skills.map(skill=>skill.skill_id);
+        const [skills] = await db.query('select skill_id from skills where user_id=?', [uid]);
+        const skillIds = skills.map(skill => skill.skill_id);
 
         // query to check if there are any clashes 
         const clashCheckQuery = `
@@ -39,8 +39,8 @@ const addClass=async (req,res)=>{
         ]);
 
         // check if clash has occured
-        if(clashResult.length>0){
-            return res.json({message:'The timings clash with an existing class', clashedClasses:clashResult});
+        if (clashResult.length > 0) {
+            return res.json({ message: 'The timings clash with an existing class', clashedClasses: clashResult });
         }
 
         // insert timings into database
@@ -51,13 +51,13 @@ const addClass=async (req,res)=>{
         await db.query(insertQuery, [skillId, start, end, date]);
 
         // Return success response
-        return res.status(201).json({ message: 'Class added successfully.' });
+        return res.status(201).json({ message: 'Class added successfully.', success: true });
 
-    }catch(error){
+    } catch (error) {
         console.log(error);
-        return res.json({message:'Server error'});
+        return res.json({ message: 'Server error' });
     }
 
 }
 
-module.exports={addClass};
+module.exports = { addClass };

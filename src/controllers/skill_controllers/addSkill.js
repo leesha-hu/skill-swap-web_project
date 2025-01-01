@@ -24,7 +24,9 @@ const addSkill = async (req, res) => {
 
             // insert into database
             await db.query('insert into skills (user_id,cat_id,name,description)values (?,?,?,?)', [uid, cid, sname, description]);
-            return res.status(200).json({ message: 'skill added successfully', success: true, redirect: '/views/tutions.html' });
+            // get the skill id of the inserted skill 
+            const [skid] = await db.query('select skill_id from skills where user_id=? and name=? and description=? and cat_id=?', [uid, sname, description, cid]);
+            return res.status(200).json({ message: 'skill added successfully', success: true, redirect: '/views/tutions.html', skillId: skid[0].skill_id });
         } catch (error) {
             console.error(error);
             res.status(500).json({ status: 'error', message: 'Server error' });
