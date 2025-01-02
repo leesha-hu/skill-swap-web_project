@@ -9,7 +9,7 @@ const { getCatSkills } = require('../controllers/skill_controllers/getCategorySk
 const { getUserSkills } = require('../controllers/skill_controllers/getUserSkills.js');
 const { getSkillClasses } = require('../controllers/class_controllers/getSkillClasses.js');
 
-router.get('/category/:categoryName', getCatSkills);
+router.get('/category/:catId', getCatSkills);
 router.get('/timings/:skillId', getSkillClasses);
 router.get('/user', getUserSkills);
 router.get('/', getSkills);

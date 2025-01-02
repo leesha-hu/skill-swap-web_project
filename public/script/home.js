@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         skill.addEventListener("click", () => {
             // Redirect to a new HTML file based on the category
+            const hidden=skill.querySelector('.hidden');
+            const cid=hidden.innerText;
             const formattedCategory = category.toLowerCase().replace(/\s+/g, "_"); // Convert to lowercase and replace spaces with underscores
-            window.location.href = `classes.html?category=${formattedCategory}`; // Navigate to the corresponding HTML file
+            window.location.href = `/views/view_category_classes.html?catId=${cid}&category=${formattedCategory}`; // Navigate to the corresponding HTML file
         });
     });
 
