@@ -102,7 +102,7 @@ async function getSkill() {
     const uid = await uidResponse.json();
     const userId = uid.userId;
 
-    const response = await fetch(`http://localhost:2000/participant/${userId}`);
+    const response = await fetch(`http://localhost:2000/participant/`);
     if (!response.ok) {
         console.error("Can't find classes");
         return [];
