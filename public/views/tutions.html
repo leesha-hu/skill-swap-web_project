@@ -44,13 +44,30 @@
                 </div>
                 <div class="times">
                 </div>
-                
+                <button class="but">Add class</button>
             </div>
             
         </div> -->
 
     </div>
     <button class="bu"><a href="../views/add_tution.html">add tution</a></button>
+
+    <div id="addr1" class="changename1">
+        <div class="changename">
+            <h2>Add new Class </h2>
+            <form action="/class" id="addClassForm" method="POST">
+                <p>Enter Date</p>
+                <!-- <input type="text" placeholder="Address" required> -->
+                <input type="date" id="dateInput" placeholder="date" name="date">
+                <p class="para">Enter the start time</p>
+                <input class="time" type="time" name="startTime" placeholder="start-time" required>
+                <p class="para">Enter the End time</p>
+                <input class="time" type="time" name="endTime" placeholder="end-time" required>
+                <input type="hidden" name="skillId" value="none" id="skillInput">
+                <button type="submit" id="addClassSubmit">Submit</button>
+            </form>
+        </div>
+    </div>
 
 
 </body>

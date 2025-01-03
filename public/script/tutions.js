@@ -1,5 +1,8 @@
 const insName = document.getElementById("insertName");
 const insHey = document.getElementById("insertHey");
+const addClassForm = document.getElementById("addClassForm");
+const addClassSubmit = document.getElementById("addClassSubmit");
+const addme = document.getElementById("addr1");
 
 async function insertName() {
     const responseName = await fetch('/getUser');
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         timingDiv.classList.add("times");
                         const date = new Date(timeSlot.date);
                         const onlyDate = date.toISOString().split('T')[0];
-                        
+
                         timingDiv.innerHTML = `
                         <p>Date: ${onlyDate}</p>
                         <p>Timings: ${timeSlot.start_time} - ${timeSlot.end_time}</p>
@@ -55,7 +58,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                         skillDiv.querySelector(".timings").appendChild(timingDiv);
                     });
+
+
                 }
+
+                
+                const addcls = document.createElement("button");
+                addcls.innerText = 'Add Class';
+
+                addcls.classList.add('but');
+                skillDiv.appendChild(addcls);
+                addcls.addEventListener("click", () => {
+                    skillInput = document.getElementById('skillInput');
+                    skillInput.value = element.skill_id;
+                    addme.style.display = 'flex';
+                    addme.onclick = (event) => {
+                        if (event.target === addme) {
+                            skillInput.value = 'none';
+                            addme.style.display = 'none';
+                        }
+                    };
+                });
             });
         } else {
             document.getElementById("para").innerText = 'NO TUTIONS, CLICK ON ADD TUTION TO ADD YOUR CLASSES';
@@ -66,27 +89,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function attachListeners() {
         document.querySelectorAll(".cancel").forEach(button => {
-            button.addEventListener("click", async(event) => {
+            button.addEventListener("click", async (event) => {
                 const timingDiv = event.target.closest(".times");
                 if (timingDiv) {
                     const ans = confirm("are you sure u want to delete tution");
                     if (ans) {
-                        classId=button.getAttribute('classId');
-                        try{
-                            const response=await fetch(`/class/${classId}`,{method:"DELETE"})
-                            const result=await response.json();
-                            if(response.ok){
-                                if(result.success){
+                        classId = button.getAttribute('classId');
+                        try {
+                            const response = await fetch(`/class/${classId}`, { method: "DELETE" })
+                            const result = await response.json();
+                            if (response.ok) {
+                                if (result.success) {
                                     timingDiv.remove();
                                     console.log("Tuition timing removed.");
-                                }else{
+                                } else {
                                     console.log(result.message);
                                 }
                             }
-                        }catch(error){
+                        } catch (error) {
                             console.log(error);
                         }
-                        
+
                     }
                 }
             });
@@ -94,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         document.querySelectorAll(".view").forEach(button => {
             button.addEventListener("click", (event) => {
-                const classId=button.getAttribute("classId");
+                const classId = button.getAttribute("classId");
                 const timingDiv = event.target.closest(".times");
                 const date = timingDiv.querySelector("p:first-child").innerText.replace("Date: ", "");
                 const skillDiv = event.target.closest(".sub");
@@ -126,3 +149,36 @@ async function getTimings(id) {
     const data = await response.json();
     return data.classes;
 }
+
+addClassSubmit.onclick = async (event) => {
+    event.preventDefault();
+
+
+    const formData = new FormData(addClassForm);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch(addClassForm.action, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (response.ok) {
+            if (result.success) {
+                console.log('class adding successful');
+                addme.style.display='none';
+            }else{
+                console.log('adding unsuccessful');
+                console.log(result);
+                addme.style.display='none';
+            }
+
+
+        } else {
+            console.log('unsuccessful');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
