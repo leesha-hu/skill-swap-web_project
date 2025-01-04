@@ -1,3 +1,4 @@
+const logoutBtn = document.getElementById('logout');
 
 document.addEventListener("DOMContentLoaded", function () {
     const skills = document.querySelectorAll(".ski");
@@ -7,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         skill.addEventListener("click", () => {
             // Redirect to a new HTML file based on the category
-            const hidden=skill.querySelector('.hidden');
-            const cid=hidden.innerText;
+            const hidden = skill.querySelector('.hidden');
+            const cid = hidden.innerText;
             const formattedCategory = category.toLowerCase().replace(/\s+/g, "_"); // Convert to lowercase and replace spaces with underscores
             window.location.href = `/views/view_category_classes.html?catId=${cid}&category=${formattedCategory}`; // Navigate to the corresponding HTML file
         });
@@ -35,5 +36,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+logoutBtn.onclick = async (event) => {
+    try {
+        const response = await fetch('/logout', { method: 'GET' })
+        const result = await response.json()
+
+        if (result.message) {
+            console.log(result.message); // Successfully logged out
+            // Redirect to the login page
+            window.location.href = 'views/index.html';
+        }
+    } catch (err) { console.error('Error logging out:', err) };
+}
 
 

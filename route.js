@@ -5,6 +5,7 @@ const app = express(); // express instance
 // import routes 
 const signupRoute = require('./src/routes/signup.js');
 const loginRoute = require('./src/routes/login.js');
+const logoutRoute = require('./src/routes/logout.js');
 const skillRoute = require('./src/routes/skill.js');
 const classRoute = require('./src/routes/class.js');
 const participantRoute = require('./src/routes/participant.js');
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, '/public')))
 // use routes
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
+app.use('/logout', logoutRoute);
 app.use('/skill', skillRoute);
 app.use('/class', classRoute);
 app.use('/participant', participantRoute);
