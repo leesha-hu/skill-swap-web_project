@@ -25,7 +25,7 @@ const enrollParticipant = async (req, res) => {
 
         // insert into database 
         await db.query('insert into participants (class_id,user_id) values (?,?)', [classid, uid]);
-        return res.json({ message: 'successfully inserted', success: true });
+        return res.json({ message: 'skill added successfully', success: true });
     } catch (error) {
         console.log(error);
         return res.json({ message: 'Server error' });

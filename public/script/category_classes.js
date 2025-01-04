@@ -1,4 +1,5 @@
 const insName = document.getElementById("insertName");
+const alertPop = document.getElementById('alert')
 
 const urlParams = new URLSearchParams(window.location.search);
 const category = urlParams.get('category');
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function gets() {
         const classes = await gettution();
-        
+
         if (classes.length > 0) {
 
             let time = [];
@@ -84,12 +85,30 @@ document.addEventListener("DOMContentLoaded", function () {
                             const response = await fetch(`/participant/${classId}`, { method: "POST" })
                             const result = await response.json();
                             if (result.success) {
+                                alertPop.textContent = result.message;
+                                if (alertPop.classList.contains('error')) {
+                                    alertPop.classList.remove('error');
+                                }
+                                alertPop.classList.add('success');
+                                alertPop.style.display = 'block';
                                 console.log("Tuition timing added.");
                             } else {
+                                alertPop.textContent = result.message;
+                                if (alertPop.classList.contains('success')) {
+                                    alertPop.classList.remove('success');
+                                }
+                                alertPop.classList.add('error');
+                                alertPop.style.display = 'block';
                                 console.log("unsuccessful")
                             }
 
                         } catch (error) {
+                            alertPop.textContent = 'Something went wrong';
+                            if (alertPop.classList.contains('success')) {
+                                alertPop.classList.remove('success');
+                            }
+                            alertPop.classList.add('error');
+                            alertPop.style.display = 'block';
                             console.log(error);
                         }
 

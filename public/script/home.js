@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Redirect to a new HTML file based on the category
             const hidden = skill.querySelector('.hidden');
             const cid = hidden.innerText;
-            const formattedCategory = category.toLowerCase().replace(/\s+/g, "_"); // Convert to lowercase and replace spaces with underscores
+            const formattedCategory = category.toUpperCase()
             window.location.href = `/views/view_category_classes.html?catId=${cid}&category=${formattedCategory}`; // Navigate to the corresponding HTML file
         });
     });
