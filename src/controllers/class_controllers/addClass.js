@@ -49,9 +49,10 @@ const addClass = async (req, res) => {
             VALUES (?, ?, ?, ?)
         `;
         await db.query(insertQuery, [skillId, start, end, date]);
+        const [id] = await db.query('select class_id from class_timings where skill_id=? and start_time=? and end_time=? and date=?', [skillId, start, end, date])
 
         // Return success response
-        return res.status(201).json({ message: 'Class added successfully.', success: true });
+        return res.status(201).json({ message: 'Class added successfully.', success: true, id: id[0] });
 
     } catch (error) {
         console.log(error);

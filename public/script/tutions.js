@@ -3,6 +3,9 @@ const insHey = document.getElementById("insertHey");
 const addClassForm = document.getElementById("addClassForm");
 const addClassSubmit = document.getElementById("addClassSubmit");
 const addme = document.getElementById("addr1");
+const alertPop = document.getElementById('alert')
+
+let btn;
 
 async function insertName() {
     const responseName = await fetch('/getUser');
@@ -62,15 +65,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
-                
+
                 const addcls = document.createElement("button");
                 addcls.innerText = 'Add Class';
 
                 addcls.classList.add('but');
                 skillDiv.appendChild(addcls);
-                addcls.addEventListener("click", () => {
+                addcls.addEventListener("click", (event) => {
                     skillInput = document.getElementById('skillInput');
                     skillInput.value = element.skill_id;
+                    btn = event.target;
                     addme.style.display = 'flex';
                     addme.onclick = (event) => {
                         if (event.target === addme) {
@@ -166,16 +170,58 @@ addClassSubmit.onclick = async (event) => {
         const result = await response.json();
         if (response.ok) {
             if (result.success) {
+                alertPop.textContent = result.message;
+                if (alertPop.classList.contains('error')) {
+                    alertPop.classList.remove('error');
+                }
+                alertPop.classList.add('success');
+                alertPop.style.display = 'block';
+
+                const parent = btn.parentElement;
+                const id = result.id;
+
+
+                const timeSlot = data;
+
+                const timingDiv = document.createElement('div');
+                timingDiv.classList.add("times");
+
+
+                timingDiv.innerHTML = `
+                        <p>Date: ${timeSlot.date}</p>
+                        <p>Timings: ${timeSlot.startTime} - ${timeSlot.endTime}</p>
+                        <div class="button-container">
+                            <button class="but cancel" classId="${id.class_id}">Cancel Tution</button>
+                            <button class="but view" classId="${id.class_id}">View Students</button>                           
+                        </div>
+                    `;
+
+                parent.insertBefore(timingDiv,btn);
+
+
+
                 console.log('class adding successful');
-                addme.style.display='none';
-            }else{
+                addme.style.display = 'none';
+            } else {
+                alertPop.textContent = result.message;
+                if (alertPop.classList.contains('success')) {
+                    alertPop.classList.remove('success');
+                }
+                alertPop.classList.add('error');
+                alertPop.style.display = 'block';
                 console.log('adding unsuccessful');
                 console.log(result);
-                addme.style.display='none';
+                addme.style.display = 'none';
             }
 
 
         } else {
+            alertPop.textContent = response.status;
+            if (alertPop.classList.contains('success')) {
+                alertPop.classList.remove('success');
+            }
+            alertPop.classList.add('error');
+            alertPop.style.display = 'block';
             console.log('unsuccessful');
         }
     } catch (error) {
