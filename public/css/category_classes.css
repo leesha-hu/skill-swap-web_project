@@ -13,7 +13,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    /* width: 100%; */
     background-color:rgb(235, 177, 186);
     background-color:#f3f399;
     color:rgba(13, 32, 7, 0.9);
@@ -21,6 +21,23 @@ header {
     position: sticky;
     top: 0;
     z-index: 1;
+}
+
+header button{
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+header button:hover{
+    background-color: #45a049;
+    color: white;
 }
 .toteach{
     height:max-content;

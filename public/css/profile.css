@@ -14,7 +14,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    /* width: 100vw; */
 
     background-color: #f3f399;
     color: rgba(13, 32, 7, 0.9);
@@ -30,7 +30,24 @@ header h1 {
     right: 50px;
 }
 
-header button {
+header button{
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+header button:hover{
+    background-color: #45a049;
+    color: white;
+}
+
+/* header button {
     position: relative;
     right: 100px;
     border-radius: 10px;
@@ -39,7 +56,7 @@ header button {
     background-color: rgb(20, 124, 20);
     color: #f9f9f9;
     font-size: 15px;
-}
+} */
 
 .main {
     display: flex;

@@ -16,7 +16,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(235, 177, 186);
+  background-color: #f3f399;
   color: white;
   padding: 5px 20px;
   position: sticky;
@@ -38,7 +38,7 @@ header {
   justify-content: right;
 }
 
-.signin {
+.homeBtn {
   display: flex;
   gap: 10px;
   background-color: #fff;
@@ -48,31 +48,12 @@ header {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-left: 39px;
   font-weight: bold;
 }
 
-.signin:hover {
+.homeBtn:hover {
   background-color: #45a049;
   color: white;
-}
-
-.exploreBtn {
-  display: flex;
-  gap: 10px;
-  background-color: #fff;
-  color: #4CAF50;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.exploreBtn:hover {
-  background-color: #45a049;
-
 }
 
 .exploreLink {
