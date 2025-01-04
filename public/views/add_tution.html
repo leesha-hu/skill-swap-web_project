@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EH - Tution Form</title>
     <link rel="stylesheet" href="../css/add_tuition.css">
+    <link rel="stylesheet" href="../css/alerts.css">
 
 </head>
 
 <body>
+    <div id="alert">message</div>
     <div class="register-container">
         <h2 class="h2">Add Tution</h2>
         <form id="tutionForm" action="/skill" method="post">
@@ -56,8 +58,8 @@
                     <p class="para">Enter the End time:</p>
                     <input class="time" type="time" name="endTime" placeholder="end-time" required>
 
-                    <p class="para">Enter your Qualification:</p>
-                    <input type="text" placeholder="Qualification" required>
+                    <!-- <p class="para">Enter your Qualification:</p>
+                    <input type="text" placeholder="Qualification" required> -->
                     <p class="para">Enter the skill Description:</p>
                     <textarea class="inp" name="description" rows="2" cols="49" placeholder="Description"
                         required> </textarea>

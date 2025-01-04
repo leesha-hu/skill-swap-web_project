@@ -1,7 +1,7 @@
 const db = require('../../db/connection.js');
 
 const deleteSkill = async (req, res) => {
-    const { skill_id } = req.body;
+    const skill_id = req.params.skillId;
 
     // Validate input
     if (!skill_id) {
@@ -18,7 +18,7 @@ const deleteSkill = async (req, res) => {
         // Delete the skill
         await db.query('DELETE FROM skills WHERE skill_id = ?', [skill_id]);
 
-        return res.status(200).json({ status: 'success', message: 'Skill deleted successfully' });
+        return res.status(200).json({ status: 'success', message: 'Skill deleted successfully', success: true });
     } catch (error) {
         console.error('Error deleting skill:', error.message);
         return res.status(500).json({ status: 'error', message: 'Server error' });

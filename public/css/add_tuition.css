@@ -6,6 +6,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 
 .register-container {
@@ -14,6 +16,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 400px;
+    /* margin-top: 50px; */
 }
 
 .register-container h2 {
@@ -132,9 +135,4 @@ h5 {
 
 .time {
     font-size: large;
-}
-
-.h2 {
-    padding-top: 75px;
-
 }
