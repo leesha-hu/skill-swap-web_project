@@ -10,6 +10,7 @@ const skillRoute = require('./src/routes/skill.js');
 const classRoute = require('./src/routes/class.js');
 const participantRoute = require('./src/routes/participant.js');
 const getUserRoute = require('./src/routes/getUserDetails.js');
+const notificationRoute = require('./src/routes/notifications.js');
 
 app.use(express.static(path.join(__dirname, '/public')))
 
@@ -21,6 +22,7 @@ app.use('/skill', skillRoute);
 app.use('/class', classRoute);
 app.use('/participant', participantRoute);
 app.use('/getUser', getUserRoute);
+app.use('/notifications', notificationRoute);
 
 // middleware for error handling
 app.use((req, res) => {
