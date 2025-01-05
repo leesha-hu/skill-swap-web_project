@@ -1,8 +1,7 @@
 const db=require("../db/connection.js");
 
 async function sendClassNotificationsForToday(req,res) {
-    // const uid=req.session.userId;
-    const uid=req.body.userId;
+    const uid=req.session.userId;
     const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
     try{

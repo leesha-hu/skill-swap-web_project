@@ -44,7 +44,7 @@ logoutBtn.onclick = async (event) => {
         if (result.message) {
             console.log(result.message); // Successfully logged out
             // Redirect to the login page
-            window.location.href = 'views/index.html';
+            window.location.href = '/views';
         }
     } catch (err) { console.error('Error logging out:', err) };
 }
