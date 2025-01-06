@@ -28,7 +28,7 @@ const userLogin = async (req, res) => {
             if (isMatch) {
                 req.session.userId = rows[0].user_id;
                 req.session.userName = rows[0].name;
-                return res.sendFile(path.join(__dirname, '../../public/views/home_page.html'))
+                return res.status(200).json({ success: true, redirect: '/views/home_page.html' });
             } else {
                 return res.status(400).json({ error: "Invalid email or password" });
             }

@@ -1,6 +1,8 @@
 // element variables
 const signInModal = document.getElementById('signin-modal');
 const signInButton = document.getElementById('btn');
+const signinForm = document.getElementById('signinForm');
+const alertDiv = document.getElementById('alert');
 
 // display signin dialog box 
 signInButton.onclick = () => {
@@ -42,3 +44,40 @@ function showSlides() {
 
 // Start slideshow
 showSlides();
+
+signinForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(signinForm);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+        const response = await fetch(signinForm.action, {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        const result = await response.json();
+
+        if (response.ok) {
+            if (result.success) {
+                window.location.href = result.redirect;
+            } else {
+                signInModal.style.display = 'none';
+                alertDiv.innerText = result.error;
+                alertDiv.classList.add('error');
+                alertDiv.style.display = 'block';
+
+                console.log(result.error);
+            }
+
+        } else {
+            signInModal.style.display = 'none';
+            alertDiv.innerText = result.error;
+            alertDiv.classList.add('error');
+            alertDiv.style.display = 'block';
+            console.log(result.error);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})

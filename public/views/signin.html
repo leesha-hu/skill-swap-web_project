@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>EH - Sign In</title>
     <link rel="stylesheet" href="../css/signin.css">
+    <link rel="stylesheet" href="../css/alerts.css">
 </head>
 <body>
+    <div id="alert">message</div>
     <header>
         <div class="logo">
           
@@ -18,7 +20,7 @@
         <div class="main">
     <div class="signin-container">
         <h2>Sign in</h2>
-        <form action="/login" method="post">
+        <form action="/login" method="post" id="signinForm">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Sign In</button>
