@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    background-color: rgb(178, 231, 213, 0.2);
+    /* padding: 20px; */
+}
+
+.image1 {
+    height: 60px;
+    margin-top: 10px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 100%; */
+    background-color: rgb(235, 177, 186);
+    background-color: #f3f399;
+    color: rgba(13, 32, 7, 0.9);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+header button {
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+header button:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+#map {
+    height: 630px;
+}
+
+/* Remove the default padding and background from the divIcon */
+.leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;/* Remove default borders */
+    box-shadow: none !important;/* Remove any shadow */
+    padding: 0 !important;/* Remove default padding */
+    margin: 0 !important;/* Remove default margin */
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Circle marker style */
+.leaflet-div-icon .circle {
+    background-color: rgb(219, 114, 116);/* Change to any color */
+    width: 20px;/* Size of the circle */
+    height: 20px;/* Size of the circle */
+    border-radius: 50%;/* Makes the shape circular */
+    border: 2px solid rgb(158, 48, 48);/* Optional border */
+}
