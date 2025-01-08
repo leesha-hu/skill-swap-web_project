@@ -30,6 +30,12 @@ header {
     justify-content: right;
 }
 
+.image1 {
+    height: 60px;
+    margin-top: 10px;
+
+}
+
 .signin {
     display: flex;
     gap: 10px;
@@ -458,11 +464,7 @@ footer a:hover {
     }
 }
 
-.image1 {
-    height: 60px;
-    margin-top: 10px;
 
-}
 
 .signup-section {
     text-align: center;
