@@ -59,9 +59,13 @@ header button:hover {
 
 /* Circle marker style */
 .leaflet-div-icon .circle {
-    background-color: rgb(219, 114, 116);/* Change to any color */
-    width: 20px;/* Size of the circle */
-    height: 20px;/* Size of the circle */
-    border-radius: 50%;/* Makes the shape circular */
-    border: 2px solid rgb(158, 48, 48);/* Optional border */
+    background-color: rgb(145 229 171);
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(77 132 64);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    transform: rotate(45deg);
+    box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.5);
 }

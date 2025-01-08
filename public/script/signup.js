@@ -127,10 +127,6 @@ if ("geolocation" in navigator) {
 form.addEventListener("submit", async (event) => {
     event.preventDefault(); // Prevent form submission until coordinates are captured
 
-    // // Default coordinates if geolocation fails (could also be empty strings or a default location)
-    // let latitude = "unknown";
-    // let longitude = "unknown";
-
     // check if password and confirmPassword match 
     const password = document.querySelector('input[name="password"]');
     const confirmPassword = document.querySelector('input[name="confirm_password"]');
