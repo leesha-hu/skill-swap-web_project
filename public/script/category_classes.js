@@ -61,9 +61,6 @@ function attachListeners() {
         // add event listener to button 
         button.addEventListener("click", async (event) => {
 
-            // const timingDiv = event.target.closest(".times");
-            // if (timingDiv) {
-
             const ans = confirm("are you sure u want to add tution");
             if (ans) {
                 // get class id of the class to be added 
@@ -86,8 +83,6 @@ function attachListeners() {
 
 
             }
-
-            // }
 
         });
     });

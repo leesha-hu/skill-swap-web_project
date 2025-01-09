@@ -17,7 +17,7 @@ fetch("/getUser")
 // function to add Notification
 async function gets() {
     let arr = await getnotify(); // get notifications for the current day 
-    console.log(arr)
+
     const teachNotify = arr.teach;
     const learnNotify = arr.learn;
     const container = document.getElementById('ma');
