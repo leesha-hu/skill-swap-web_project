@@ -15,7 +15,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* width: 100%; */
     background-color: rgb(235, 177, 186);
     background-color: #f3f399;
     color: rgba(29, 94, 146, 0.9);

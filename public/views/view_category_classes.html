@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EH - Classes</title>
+    <!-- css linking  -->
     <link rel="stylesheet" href="../css/category_classes.css">
     <link rel="stylesheet" href="../css/alerts.css">
 
 </head>
+
 <body>
+    <!-- alert message popup  -->
     <div id="alert">message</div>
+
+    <!-- navbar  -->
     <header>
         <div class="logo">
-          
             <img class="image1" src="../images/empowerhub-logo.png" alt="logo">
-          </div>
-          <h1>Welcome you</h1>
-          <h3 id="insertName">name of user</h3>
-          <button class="homeBtn" onclick="window.location.href='/views/home_page.html'">Home</button>
-          </header>
-          <h2 class="h2">You can learn here</h2>
+        </div>
+
+        <h3 id="insertName">Hi! name of user</h3>
+        <button class="homeBtn" onclick="window.location.href='/views/home_page.html'">Home</button>
+    </header>
+
+    <h2 class="h2">You can learn here</h2>
     <div class="inf">
         <p>Hey [User]</p>
         <p>Learn from your community.Share with the world.</p>
         <p>Learn, teach, grow – one swap at a time!</p>
     </div>
-    
+
+    <!-- container to display classes  -->
     <div class="toteach">
         <p id="para"></p>
-         <!-- <div class="sub">
+        <!-- <div class="sub">
             <h2>Skill:name1</h2>
             <p>Teacher:${element.teacher}</p>
             <p>Description:${element.description}</p>
@@ -53,11 +60,12 @@
           
         </div>
           -->
-        
+
     </div>
     <button class="bu"><a href="/views/home_page.html">add skill from other category</a></button>
 
 </body>
+<!-- javascript linking  -->
 <script src="../script/category_classes.js"></script>
 
 </html>

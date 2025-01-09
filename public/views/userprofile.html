@@ -5,25 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EH - Profile</title>
+    <!-- css linking  -->
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 
 <body>
+    <!-- alert message popup  -->
     <div id="Message">message</div>
+
+    <!-- navbar  -->
     <header>
         <div class="logo">
-
             <img class="image1" src="../images/empowerhub-logo.png" alt="logo">
         </div>
+
         <h1>User profile Page</h1>
         <div class="btnContainer">
             <button class="homeBtn" onclick="window.location.href='/views/home_page.html'">Home</button>
             <button id="bt1">Edit details</button>
 
         </div>
-
     </header>
+
     <div class="main">
+        <!-- display profile  -->
         <div class="main2">
             <p id="user_name"> Name:leesha</p>
             <p id="user_phone"> Phone Number:90861752</p>
@@ -31,6 +36,7 @@
             <p id="user_address"> Address:something uru </p>
         </div>
     </div>
+    <!-- popup when clicked on edit details  -->
     <div class="show1" id="sh1">
         <div class="show">
             <button class="change" id="name">Change your Name</button>
@@ -39,6 +45,7 @@
             <button class="change" id="pass">Change your password</button>
         </div>
     </div>
+    <!-- dialog box to change name  -->
     <div id="name1" class="changename1">
         <div class="changename">
             <h2>Edit Your Name</h2>
@@ -49,6 +56,7 @@
             </form>
         </div>
     </div>
+    <!-- dialog box to change phone number -->
     <div id="phone1" class="changename1">
         <div class="changename">
             <h2>Edit Your Phone Number</h2>
@@ -59,18 +67,20 @@
             </form>
         </div>
     </div>
+    <!-- dialog box to change address  -->
     <div id="addr1" class="changename1">
         <div class="changename">
             <h2>Edit Your Address </h2>
             <form action="/getUser/address" class="add_form" id="addressForm">
                 <p>Enter your correct Address</p>
                 <!-- <input type="text" placeholder="Address" required> -->
-                <textarea id="address" name="inputAddress" rows="4" cols="45" placeholder="Enter your full address here..."
-                    required></textarea>
+                <textarea id="address" name="inputAddress" rows="4" cols="45"
+                    placeholder="Enter your full address here..." required></textarea>
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
+    <!-- dialog box to change password  -->
     <div id="pass1" class="changename1">
         <div class="changename">
             <h2>Edit Your Password </h2>
@@ -85,6 +95,7 @@
 
     </div>
 </body>
+<!-- javascript linking  -->
 <script src="../script/profile.js"></script>
 
 </html>

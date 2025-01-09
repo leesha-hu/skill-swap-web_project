@@ -34,6 +34,18 @@ const initMap=async (lat,lng)=>{
     });
 }
 
+// function display alert 
+function displayAlert(message,removeClass,addClass){
+    errorMessage.innerText = message;
+    if (errorMessage.classList.contains(removeClass)) {
+        errorMessage.classList.remove(removeClass);
+    }
+    if (!errorMessage.classList.contains(addClass)) {
+        errorMessage.classList.add(addClass);
+    }
+    errorMessage.style.display = "block";
+}
+
 
 
 // Check if Geolocation is available
@@ -55,51 +67,23 @@ if ("geolocation" in navigator) {
             // Handle geolocation errors
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    errorMessage.innerText = "User denied the request for Geolocation.";
                     // change errorMessage class to warning
-                    if (errorMessage.classList.contains("error")) {
-                        errorMessage.classList.remove('error');
-                    }
-                    if (!errorMessage.classList.contains("warning")) {
-                        errorMessage.classList.add("warning");
-                    }
-                    errorMessage.style.display = "block";
+                    displayAlert("User denied the request for Geolocation.",'error','warning');
                     break;
 
                 case error.POSITION_UNAVAILABLE:
-                    errorMessage.innerText = "Location information is unavailable.";
                     // change errorMessage class to warning
-                    if (errorMessage.classList.contains("error")) {
-                        errorMessage.classList.remove('error');
-                    }
-                    if (!errorMessage.classList.contains("warning")) {
-                        errorMessage.classList.add("warning");
-                    }
-                    errorMessage.style.display = "block";
+                    displayAlert("Location information is unavailable.",'error','warning');
                     break;
 
                 case error.TIMEOUT:
-                    errorMessage.innerText = "The request to get user location timed out.";
                     // change errorMessage class to warning
-                    if (errorMessage.classList.contains("error")) {
-                        errorMessage.classList.remove('error');
-                    }
-                    if (!errorMessage.classList.contains("warning")) {
-                        errorMessage.classList.add("warning");
-                    }
-                    errorMessage.style.display = "block";
+                    displayAlert("The request to get user location timed out.",'error','warning');
                     break;
 
                 case error.UNKNOWN_ERROR:
-                    errorMessage.innerText = "An unknown error occurred.";
                     // change errorMessage class to warning
-                    if (errorMessage.classList.contains("error")) {
-                        errorMessage.classList.remove('error');
-                    }
-                    if (!errorMessage.classList.contains("warning")) {
-                        errorMessage.classList.add("warning");
-                    }
-                    errorMessage.style.display = "block";
+                    displayAlert("An unknown error occurred.",'error','warning');
                     break;
             }
 
@@ -109,15 +93,8 @@ if ("geolocation" in navigator) {
     );
 } else {
     // If geolocation is not available, display error message
-    errorMessage.innerText = "Geolocation is not supported by this browser.";
     // change errorMessage class to warning
-    if (errorMessage.classList.contains("error")) {
-        errorMessage.classList.remove('error');
-    }
-    if (!errorMessage.classList.contains("warning")) {
-        errorMessage.classList.add("warning");
-    }
-    errorMessage.style.display = "block";
+    displayAlert("Geolocation is not supported by this browser.",'error','warning');
 
     initMap(12.9716, 77.5946);
 }
@@ -131,20 +108,12 @@ form.addEventListener("submit", async (event) => {
     const password = document.querySelector('input[name="password"]');
     const confirmPassword = document.querySelector('input[name="confirm_password"]');
     if (password.value !== confirmPassword.value) {
-        errorMessage.textContent = "Passwords do not match.";
-
         // change errorMessage class to error 
-        if (errorMessage.classList.contains("warning")) {
-            errorMessage.classList.remove('warning');
-        }
-        if (!errorMessage.classList.contains("error")) {
-            errorMessage.classList.add("error");
-        }
         // display error 
-        errorMessage.style.display = "block";
+        displayAlert("Passwords do not match.",'warning','error');
     }
 
-
+    // get form data 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
@@ -164,29 +133,17 @@ form.addEventListener("submit", async (event) => {
             }
         } else {
             // Display error message
-            errorMessage.textContent = result.error || "An unknown error occurred.";
 
             // change errorMessage class to error
-            if (errorMessage.classList.contains("warning")) {
-                errorMessage.classList.remove('warning');
-            }
-            if (!errorMessage.classList.contains("error")) {
-                errorMessage.classList.add("error");
-            }
-            errorMessage.style.display = "block";
+           
+            displayAlert(result.error || "An unknown error occurred.",'warning','error');
+
         }
     } catch (err) {
         console.error("Error:", err);
-        errorMessage.textContent = "A network error occurred.";
 
         // change errorMessage class to error
-        if (errorMessage.classList.contains("warning")) {
-            errorMessage.classList.remove('warning');
-        }
-        if (!errorMessage.classList.contains("error")) {
-            errorMessage.classList.add("error");
-        }
-        errorMessage.style.display = "block";
+        displayAlert("A network error occurred.",'warning','error');
     }
 
 });

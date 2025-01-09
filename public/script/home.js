@@ -1,7 +1,7 @@
-const logoutBtn = document.getElementById('logout');
+const logoutBtn = document.getElementById('logout'); // get logout button
 
 document.addEventListener("DOMContentLoaded", function () {
-    const skills = document.querySelectorAll(".ski");
+    const skills = document.querySelectorAll(".ski"); // get each category div
 
     skills.forEach(skill => {
         const category = skill.querySelector("h3").innerText; // Get the category name
@@ -15,10 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // get heading to add name 
     const main_heading = document.getElementById("main_heading");
     const welcome_heading = document.getElementById("welcome_head");
 
-
+    // fetch user name 
     fetch("/getUser")
         .then(response => {
             if (!response.ok) {
@@ -36,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 });
 
+// event listener for logout button on clicking 
 logoutBtn.onclick = async (event) => {
     try {
         const response = await fetch('/logout', { method: 'GET' })

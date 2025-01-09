@@ -1,6 +1,7 @@
-let b1 = document.getElementById("bt1");
-let d1 = document.getElementById("sh1");
-b1.onclick = () => d1.style.display = 'flex';
+let b1 = document.getElementById("bt1"); // edit details button
+let d1 = document.getElementById("sh1"); // change details container
+b1.onclick = () => d1.style.display = 'flex'; // display change details container when clicked
+// hide container when clicked on background 
 d1.onclick = (event) => {
     if (event.target === d1) d1.style.display = 'none';
 };
@@ -20,6 +21,7 @@ openModal("phone", "phone1");
 openModal("address", "addr1");
 openModal("pass", "pass1");
 
+// function to display profile 
 async function loadProfile() {
     const response = await fetch('/getUser/profile');
     if (!response.ok) {
@@ -40,6 +42,7 @@ async function loadProfile() {
     }
 }
 
+// hide alert message when clicked on 
 const message = document.getElementById("Message");
 message.addEventListener('click', (event) => {
     if (message.style.display == 'block') {
@@ -47,6 +50,7 @@ message.addEventListener('click', (event) => {
     }
 })
 
+// changing name 
 const nameForm = document.getElementById('nameForm');
 nameForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -95,6 +99,7 @@ nameForm.addEventListener("submit", async (event) => {
     }
 })
 
+// changing phone number 
 const phoneForm = document.getElementById('phoneForm');
 phoneForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -143,6 +148,7 @@ phoneForm.addEventListener("submit", async (event) => {
     }
 })
 
+// changing address 
 const addressForm = document.getElementById('addressForm');
 addressForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -188,6 +194,7 @@ addressForm.addEventListener("submit", async (event) => {
 
 })
 
+// changing password 
 const passwordForm = document.getElementById('passwordForm');
 passwordForm.addEventListener("submit", async (event) => {
     event.preventDefault();

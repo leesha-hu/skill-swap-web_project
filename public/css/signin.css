@@ -37,9 +37,7 @@ header {
     background: rgb(103, 103, 192);
     padding: 20px;
     border-radius: 8px;
-    /* border: 1px black solid; */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
     width: 300px;
 }
 
@@ -92,5 +90,4 @@ header {
 header h1 {
     position: relative;
     right: 550px;
-
 }

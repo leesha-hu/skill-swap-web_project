@@ -1,5 +1,7 @@
 window.onload = async function () {
+    // get div to insert name 
     const user_name = document.getElementById("user_name");
+    // fetch the user name and display it 
     fetch("/getUser")
         .then(response => {
             if (!response.ok) {
@@ -15,27 +17,13 @@ window.onload = async function () {
             document.getElementById("welcome-message").innerText = "Welcome, Guest!";
         });
 
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const name = urlParams.get('category');
-    const header = document.getElementById("h1");
-    header.innerHTML = `See your selected classes from all categories`;
-
-    // const categories = ["lifestyle", "business", "technical", "sports", "art", "music", "dance", "drama"];
-    // const container = document.getElementsByClassName("tolearn")[0];
-
-    // const allClasses = await Promise.all(categories.map(category => getSkill(category)));
-
+    // get classes user is enrolled in 
     const allClasses = await getSkill();
+    // get container to display the enrolled classes 
     const container = document.getElementById('tolearn');
 
     allClasses.forEach((element, index) => {
-
-        // const categoryTitle = document.createElement('h1');
-        // categoryTitle.innerText = `${categories[index]} Classes:`;
-        // container.appendChild(categoryTitle);
-
-
+        // display each class 
         const newDiv = document.createElement('div');
         newDiv.classList.add("sub");
 
@@ -61,7 +49,7 @@ window.onload = async function () {
 
         const newbut = document.createElement("button");
         newbut.classList.add("cancel");
-        newbut.innerText = "Cancel Skill"; // Optional: set button text
+        newbut.innerText = "Cancel Skill";
         // Add the class ID as a data attribute to the button
         newbut.setAttribute("data-id", element.class_id);
 
@@ -72,13 +60,13 @@ window.onload = async function () {
                 // Get the class ID from the button's data-id attribute
                 const classId = newbut.dataset.id;
 
-                // Optionally, delete from backend (send DELETE request)
+                // delete from backend 
                 const response = await fetch(`/participant/${classId}`, { method: 'DELETE' }); // Assuming skill_name is unique for identification
                 const result = await response.json();
                 if (response.ok) {
                     // Remove the class from the DOM
                     container.removeChild(newDiv);
-                }else{
+                } else {
                     console.log("unsuccessful");
                 }
             }
@@ -87,20 +75,11 @@ window.onload = async function () {
 
         container.appendChild(newDiv);
 
-
-
-
     });
 };
 
+// function to get enrolled classes 
 async function getSkill() {
-    const uidResponse = await fetch('/getUser/uid');
-    if (!uidResponse.ok) {
-        console.error('not logged in');
-        return [];
-    }
-    const uid = await uidResponse.json();
-    const userId = uid.userId;
 
     const response = await fetch(`http://localhost:2000/participant/`);
     if (!response.ok) {

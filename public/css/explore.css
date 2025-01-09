@@ -126,7 +126,6 @@ footer a:hover {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
     width: 90%;
-    /* max-width: 1000px; */
     margin: 20px auto;
 
 }
@@ -134,9 +133,6 @@ footer a:hover {
 .grid-item {
     height: 200px;
     width: 200px;
-    /* display: flex;
-align-items: center;
-justify-content: center; */
     padding: 20px;
     background-color: #81addd;
     color: #fff;
@@ -144,7 +140,6 @@ justify-content: center; */
     font-weight: bold;
     border-radius: 8px;
     transition: transform 0.3s, background-color 0.3s;
-    /* text-align: center; */
     margin-bottom: 10px;
 }
 

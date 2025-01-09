@@ -177,6 +177,7 @@ main {
     border: 1px solid rgb(184, 171, 109);
 }
 
+/* map styling  */
 #map {
     height: 400px;
     margin-top: 20px;

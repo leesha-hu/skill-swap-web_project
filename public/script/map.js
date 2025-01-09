@@ -1,11 +1,14 @@
 window.onload = async () => {
+    // get coordinates of the user 
     const response = await fetch('/getUser/coordinates');
     const result = await response.json();
+
     if (response.ok) {
         if (result.success) {
 
             const lat = result.latitude;
             const lon = result.longitude;
+            // display map 
             const map = L.map('map').setView([lat, lon], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
@@ -21,11 +24,9 @@ window.onload = async () => {
                 fillOpacity: 0.3  // Fill opacity (30%)
             }).addTo(map);
 
-            const skills = await allNearbySkills();
+            const skills = await allNearbySkills(); // get skills near to the user
 
-
-
-            // Create a custom icon with a specific color using L.divIcon
+            // Create a custom red icon to indicate nearby classes
             const redIcon = L.divIcon({
                 className: 'leaflet-div-icon',
                 html: '<div class="circle"></div>',
@@ -33,6 +34,7 @@ window.onload = async () => {
             });
 
             if (skills) {
+                // if nearby skills are found then group them based on user_id 
                 const groupedSkills = skills.reduce((acc, skill) => {
                     // Check if the user_id exists in the accumulator, if not, initialize it as an array
                     if (!acc[skill.user_id]) {
@@ -79,6 +81,7 @@ window.onload = async () => {
 
 }
 
+// function to get nearby skills 
 async function allNearbySkills() {
     const response = await fetch('/skill');
     const result = await response.json();

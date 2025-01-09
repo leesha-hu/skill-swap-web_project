@@ -1,16 +1,37 @@
-const form = document.getElementById('tutionForm')
-const a1 = document.getElementById("me");
-const alertPop = document.getElementById('alert')
+const form = document.getElementById('tutionForm') // form variable
+const a1 = document.getElementById("me"); // submit button variable
+const alertPop = document.getElementById('alert') // alert div variable
 
+// function to display alert 
+function displayAlert(message, removeClass, addClass) {
+    alertPop.textContent = message;
+    if (alertPop.classList.contains(removeClass)) {
+        alertPop.classList.remove(removeClass);
+    }
+    alertPop.classList.add(addClass);
+    alertPop.style.display = 'block';
+}
+
+// close alert when clicked on it 
+alertPop.addEventListener('click',(event)=>{
+    if(alertPop.style.display=='block'){
+        alertPop.style.display='none';
+    }
+})
+
+// event listener for submit button 
 a1.onclick = async (event) => {
     event.preventDefault();
-    let an = confirm("you sure you want to add tution");
-    if (an) {
+    let an = confirm("you sure you want to add tution"); // confirm adding of tuition
 
+    // if confirm 
+    if (an) {
+        // get data inside form 
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
         try {
+            // post the data 
             const response = await fetch(form.action, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -18,8 +39,11 @@ a1.onclick = async (event) => {
             });
             const result = await response.json();
 
+            // check if response was ok 
             if (response.ok) {
+                // check if post was successful
                 if (result.success) {
+                    // add class timings as the skill was added successfully
                     const classResponse = await fetch('/class', {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
@@ -31,17 +55,17 @@ a1.onclick = async (event) => {
                         }),
                     });
                     const classResult = await classResponse.json();
+
+                    // check if class timings was added successfully
                     if (classResponse.ok) {
                         if (classResult.success) {
+                            // redirect to tutions page 
                             window.location.href = result.redirect;
                         } else {
-                            alertPop.textContent = classResult.message;
-                            if (alertPop.classList.contains('success')) {
-                                alertPop.classList.remove('success');
-                            }
-                            alertPop.classList.add('error');
-                            alertPop.style.display = 'block';
+                            // display alert as class addition was unsuccessful 
+                            displayAlert(classResult.message,'success','error');
 
+                            // delete the skill as class timings could not be added 
                             fetch(`/skill/${result.skillId}`, { method: "DELETE" })
                                 .then(response => {
                                     if (!response.ok) {
@@ -56,19 +80,16 @@ a1.onclick = async (event) => {
                                         console.log('skill is present');
                                     }
                                 })
-                                .catch(err=>{
-                                    console.log('error occured'+err);
+                                .catch(err => {
+                                    console.log('error occured' + err);
                                 })
 
                         }
                     } else {
-                        alertPop.textContent = classResult.message;
-                        if (alertPop.classList.contains('success')) {
-                            alertPop.classList.remove('success');
-                        }
-                        alertPop.classList.add('error');
-                        alertPop.style.display = 'block';
+                        // display alert as post class timings was unsuccessful 
+                        displayAlert(classResult.message,'success','error');
 
+                        // delete skill that was just added 
                         fetch(`/skill/${result.skillId}`, { method: "DELETE" })
                             .then(response => {
                                 if (!response.ok) {
@@ -87,29 +108,17 @@ a1.onclick = async (event) => {
                     }
 
                 } else {
+                    // addition of tution was unsuccessful 
                     alertPop.textContent = result.message;
-                    if (alertPop.classList.contains('success')) {
-                        alertPop.classList.remove('success');
-                    }
-                    alertPop.classList.add('error');
-                    alertPop.style.display = 'block';
+                    displayAlert(result.message,'success','error');
                 }
             } else {
-                alertPop.textContent = result.message;
-                if (alertPop.classList.contains('success')) {
-                    alertPop.classList.remove('success');
-                }
-                alertPop.classList.add('error');
-                alertPop.style.display = 'block';
-
+                // skill addition response was not ok 
+                displayAlert(result.message,'success','error');
             }
         } catch (error) {
-            alertPop.textContent = 'Something went wrong';
-            if (alertPop.classList.contains('success')) {
-                alertPop.classList.remove('success');
-            }
-            alertPop.classList.add('error');
-            alertPop.style.display = 'block';
+            // an error occured 
+            displayAlert('Something went wrong','success','error');
             console.log(error);
         }
     }

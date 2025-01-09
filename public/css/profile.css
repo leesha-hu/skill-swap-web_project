@@ -14,8 +14,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* width: 100vw; */
-
     background-color: #f3f399;
     color: rgba(13, 32, 7, 0.9);
     padding: 10px 20px;
@@ -46,17 +44,6 @@ header button:hover{
     background-color: #45a049;
     color: white;
 }
-
-/* header button {
-    position: relative;
-    right: 100px;
-    border-radius: 10px;
-    height: 40px;
-    width: 80px;
-    background-color: rgb(20, 124, 20);
-    color: #f9f9f9;
-    font-size: 15px;
-} */
 
 .main {
     display: flex;

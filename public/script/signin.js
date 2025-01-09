@@ -1,8 +1,10 @@
-const signinForm = document.getElementById('signinForm');
-const alertDiv = document.getElementById('alert');
+const signinForm = document.getElementById('signinForm'); // form for signing in
+const alertDiv = document.getElementById('alert'); // div to display alert
 
+// event listener when sign in form is submitted 
 signinForm.addEventListener('submit', async (event) => {
     event.preventDefault();
+    // get form data 
     const formData = new FormData(signinForm);
     const data = Object.fromEntries(formData.entries());
 

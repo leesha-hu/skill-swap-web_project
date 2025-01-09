@@ -1,13 +1,59 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
     margin: 0;
-    padding-top: 100px;
-    padding-bottom: 100px;
+}
+
+/* navbar styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(237 237 127);
+    color: white;
+    padding: 5px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.navBtn {
+    display: flex;
+    justify-content: right;
+}
+
+.image1 {
+    height: 60px;
+    margin-top: 10px;
+
+}
+
+.signin {
+    display: flex;
+    gap: 10px;
+    background-color: #fff;
+    color: #4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 39px;
+    font-weight: bold;
+}
+
+.signin:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+/* main styling */
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 50px;
 }
 
 .register-container {
@@ -16,7 +62,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     width: 400px;
-    /* margin-top: 50px; */
 }
 
 .register-container h2 {
@@ -67,17 +112,6 @@ body {
     text-align: center;
 }
 
-.back {
-    position: fixed;
-    top: 20px;
-    left: 80%;
-    text-decoration: none;
-}
-
-.back a {
-    text-decoration: none;
-}
-
 .ski {
     display: flex;
     justify-content: space-between;
@@ -92,14 +126,11 @@ body {
 .ski label {
     display: inline-block;
     margin-right: 5px;
-    /* Add spacing between options */
     font-size: 16px;
-    /* Optional: Improve readability */
 }
 
 .ski input[type="radio"] {
     margin-right: 3px;
-    /* Space between radio button and text */
 }
 
 .checkb {
@@ -112,14 +143,11 @@ body {
 .checkb label {
     display: inline-block;
     margin-right: 5px;
-    /* Add spacing between options */
     font-size: 13px;
-    /* Optional: Improve readability */
 }
 
 .checkb input[type="radio"] {
     margin-right: 3px;
-    /* Space between radio button and text */
 }
 
 .para {

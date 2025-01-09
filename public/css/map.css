@@ -3,7 +3,6 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     background-color: rgb(178, 231, 213, 0.2);
-    /* padding: 20px; */
 }
 
 .image1 {
@@ -15,7 +14,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* width: 100%; */
     background-color: rgb(235, 177, 186);
     background-color: #f3f399;
     color: rgba(13, 32, 7, 0.9);

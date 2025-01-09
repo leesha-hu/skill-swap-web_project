@@ -1,29 +1,33 @@
+// get url parameters class id and skill name
 const urlParams = new URLSearchParams(window.location.search);
 const classId = urlParams.get('classId');
 const name = urlParams.get('skillName');
 
-const insName=document.getElementById('insertName');
+const insName = document.getElementById('insertName'); // div to insert name
 
+// function to insert user name to div 
 async function insertName() {
     const responseName = await fetch('/getUser');
     const resultName = await responseName.json();
 
     if (responseName.ok) {
-        insName.innerText = resultName.userName;
+        insName.innerText = `Hi! ${resultName.userName}`;
     }
 }
 
 window.onload = async function () {
-    insertName();
+    insertName(); // call function
 
+    // display skill name 
     const a = document.getElementById("h1");
     a.innerHTML = ` See your ${name} tution students `;
 
-    const arr = await getParticipants();
-    console.log(arr);
+    const arr = await getParticipants(); // get participants
+    // get container to insert participants 
     const con = document.getElementsByClassName("tolearn")[0];
     if (arr != undefined) {
         if (arr.length > 0) {
+            // add each participant info 
             arr.forEach(element => {
                 const newd1 = document.createElement('div');
                 newd1.classList.add("sub");
@@ -38,6 +42,7 @@ window.onload = async function () {
 
         }
         else {
+            // display no participants
             const pa = document.getElementById("list");
             pa.innerText = 'You do not have any students attending your class';
         }
@@ -45,6 +50,7 @@ window.onload = async function () {
 
 };
 
+// function to get participants of a class
 function getParticipants() {
     const fe1 = fetch(`http://localhost:2000/participant/class/${classId}`)
         .then(response => {
