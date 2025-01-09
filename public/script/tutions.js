@@ -237,3 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
     insertName();
     gets();
 });
+
+// to prevent selection of previous dates in class date 
+const dates=document.getElementById("dateInput");
+const today = new Date().toISOString().split('T')[0];
+dates.setAttribute("min",today);

@@ -123,3 +123,8 @@ a1.onclick = async (event) => {
         }
     }
 };
+
+// to prevent selection of previous dates in class date 
+const dates=document.getElementsByClassName("date")[0];
+const today = new Date().toISOString().split('T')[0];
+dates.setAttribute("min",today);
