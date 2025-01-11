@@ -106,8 +106,9 @@ async function gets() {
             dlt.classList.add('butu', 'dlt');
             dlt.innerText = 'delete skill';
             skillDiv.appendChild(dlt);
-            dlt.addEventListener("click", () => {
+            dlt.addEventListener("click", async () => {
                 container.removeChild(skillDiv);
+                await deleteSkill(element.skill_id);
             })
         });
     } else {
@@ -290,6 +291,21 @@ editSubmit.addEventListener('click', async (event) => {
         displayAlert('Something went wrong', 'success', 'error');
     }
 })
+
+async function deleteSkill(skillId) {
+    const response = await fetch(`/skill/${skillId}`, { method: 'DELETE' });
+    const result = await response.json();
+
+    if (response.ok) {
+        if (result.success) {
+            displayAlert(result.message, 'error', 'success');
+        } else {
+            displayAlert(result.message, 'success', 'error');
+        }
+    } else {
+        displayAlert(result.message, 'success', 'error');
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     insertName();
