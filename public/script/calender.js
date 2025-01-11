@@ -182,16 +182,14 @@ async function getClasses(sel_date, month, year) {
     head.innerHTML = `${cls.name}`;
 
     const start = document.createElement('p');
-    start.innerHTML = `Start:-${cls.start_time}`;
+    start.innerHTML = `Start:- ${cls.start_time}`;
     const end = document.createElement('p');
-    end.innerHTML = `End:-${cls.end_time}`;
+    end.innerHTML = `End:- ${cls.end_time}`;
     const loc = document.createElement('p');
-    loc.innerHTML = `Location:-needs to be developed`;
 
     apt.appendChild(head);
     apt.appendChild(start);
     apt.appendChild(end);
-    apt.appendChild(loc);
 
     container.appendChild(apt);
 
@@ -207,11 +205,11 @@ async function getClasses(sel_date, month, year) {
     head.innerHTML = `${cls.name}`;
 
     const start = document.createElement('p');
-    start.innerHTML = `Start:-${cls.start_time}`;
+    start.innerHTML = `Start:- ${cls.start_time}`;
     const end = document.createElement('p');
-    end.innerHTML = `End:-${cls.end_time}`;
+    end.innerHTML = `End:- ${cls.end_time}`;
     const loc = document.createElement('p');
-    loc.innerHTML = `Location:-needs to be developed`;
+    loc.innerHTML = `Location:- ${cls.address}`;
 
     apt.appendChild(head);
     apt.appendChild(start);

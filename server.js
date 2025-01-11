@@ -13,7 +13,7 @@ app.use(session({
     secret: 'your-secret-key',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Ensure to use secure cookies in production (HTTPS)
+    cookie: { secure: false }
 }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));

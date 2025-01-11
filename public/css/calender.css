@@ -66,6 +66,16 @@ header {
   color: white;
 }
 
+/* info styling */
+.info {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 2px;
+  justify-content: center;
+  background-color: #cbf2ff;
+}
+
 /* calender styling */
 .cal-container {
   display: flex;

@@ -22,27 +22,34 @@ async function gets() {
     const learnNotify = arr.learn;
     const container = document.getElementById('ma');
 
-    // display teaching notifications 
-    if (teachNotify.length > 0) {
-        teachNotify.forEach(element => {
-            const not = document.createElement("div");
-            not.classList.add('notify');
-            not.innerText = `You need to teach ${element.skill_name} class at ${element.start_time} till ${element.end_time}`;
-            container.appendChild(not);
-        });
+    if (teachNotify.length == 0 && learnNotify.length == 0) {
+        // display no notifications
+        document.getElementById("para").innerText = `YOU DO NOT HAVE ANY NOTIFICATIONS FOR TODAY`;
+    } else {
+        // display teaching notifications 
+        if (teachNotify.length > 0) {
+            teachNotify.forEach(element => {
+                const not = document.createElement("div");
+                not.classList.add('notify');
+                not.innerText = `You need to teach ${element.skill_name} class at ${element.start_time} till ${element.end_time}`;
+                container.appendChild(not);
+            });
+
+        }
+
+        // display learning notifications 
+        if (learnNotify.length > 0) {
+            learnNotify.forEach(element => {
+                const not = document.createElement("div");
+                not.classList.add('notify');
+                not.innerText = `You need to go to ${element.address} for a ${element.skill_name} class from ${element.start_time} to ${element.end_time}`;
+                container.appendChild(not);
+            });
+
+        }
 
     }
 
-    // display learning notifications 
-    if (learnNotify.length > 0) {
-        learnNotify.forEach(element => {
-            const not = document.createElement("div");
-            not.classList.add('notify');
-            not.innerText = `You need to go to ${element.address} for a ${element.skill_name} class from ${element.start_time} to ${element.end_time}`;
-            container.appendChild(not);
-        });
-
-    }
 }
 
 // function to get Notification for this day 
