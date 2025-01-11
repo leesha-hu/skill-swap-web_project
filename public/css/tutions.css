@@ -241,3 +241,11 @@ header h1 {
 .changename p {
     font-size: 20px;
 }
+
+.butu{
+    height: 40px;
+    width:75px;
+    border-radius: 12px;
+    background-color: rgb(87, 13, 37);
+    color: white;   
+}

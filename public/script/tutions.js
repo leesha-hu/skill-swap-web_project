@@ -5,6 +5,10 @@ const addClassSubmit = document.getElementById("addClassSubmit"); // submit butt
 const addme = document.getElementById("addr1"); // container of form
 const container = document.querySelector(".toteach"); // container to display tuitions
 const alertPop = document.getElementById('alert') // alert div
+const edit1 = document.getElementById('edit'); // edit skill form backgroud
+const editInside = document.getElementById('editInside') // edit skill form container
+const editSubmit = document.getElementById('editSubmit') // submit button for edit form
+const editForm = document.getElementById('editForm'); // edit form
 
 let btn;
 
@@ -84,6 +88,27 @@ async function gets() {
                     }
                 };
             });
+
+            // edit skill button
+            const edit = document.createElement("button");
+            edit.classList.add('butu', 'edit');
+            edit.innerText = 'edit skill';
+            const edit1 = document.getElementById("edit");
+            skillDiv.appendChild(edit);
+            edit.addEventListener("click", () => {
+                edit1.style.display = 'flex';
+                const editSkillId = document.getElementById('editSkillId');
+                editSkillId.value = element.skill_id;
+            });
+
+            // delete skill button 
+            const dlt = document.createElement("button");
+            dlt.classList.add('butu', 'dlt');
+            dlt.innerText = 'delete skill';
+            skillDiv.appendChild(dlt);
+            dlt.addEventListener("click", () => {
+                container.removeChild(skillDiv);
+            })
         });
     } else {
         document.getElementById("para").innerText = 'NO TUTIONS, CLICK ON ADD TUTION TO ADD YOUR CLASSES';
@@ -173,6 +198,13 @@ alertPop.addEventListener('click', (event) => {
     }
 })
 
+// close edit form when clicked on background
+edit1.addEventListener('click', (event) => {
+    if (!editInside.contains(event.target)) {
+        edit1.style.display = 'none';
+    }
+})
+
 // event listener for submit button of add class timings form 
 addClassSubmit.onclick = async (event) => {
     event.preventDefault();
@@ -233,12 +265,38 @@ addClassSubmit.onclick = async (event) => {
     }
 };
 
+// submition of edit skills form 
+editSubmit.addEventListener('click', async (event) => {
+    event.preventDefault();
+    edit1.style.display = 'none';
+
+    const formData = new FormData(editForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await fetch('/skill', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    const result = await response.json();
+
+    if (response.ok) {
+        if (result.success) {
+            displayAlert(result.message, 'error', 'success');
+        } else {
+            displayAlert(result.message, 'success', 'error');
+        }
+    } else {
+        displayAlert('Something went wrong', 'success', 'error');
+    }
+})
+
 document.addEventListener("DOMContentLoaded", function () {
     insertName();
     gets();
 });
 
 // to prevent selection of previous dates in class date 
-const dates=document.getElementById("dateInput");
+const dates = document.getElementById("dateInput");
 const today = new Date().toISOString().split('T')[0];
-dates.setAttribute("min",today);
+dates.setAttribute("min", today);

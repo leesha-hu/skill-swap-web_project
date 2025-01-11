@@ -8,7 +8,7 @@ const updateSkill = async (req, res) => {
         return res.status(400).json({ status: 'error', message: 'Skill ID is required' });
     }
 
-    if (!name && !description) {
+    if (!name && description.trim() === "") {
         return res.status(400).json({ status: 'error', message: 'At least one field (name or description) must be provided for update' });
     }
 
@@ -28,7 +28,7 @@ const updateSkill = async (req, res) => {
             values.push(name);
         }
 
-        if (description) {
+        if (description.trim() !== "") {
             fields.push('description = ?');
             values.push(description);
         }
@@ -38,7 +38,7 @@ const updateSkill = async (req, res) => {
         const query = `UPDATE skills SET ${fields.join(', ')} WHERE skill_id = ?`;
         await db.query(query, values);
 
-        return res.status(200).json({ status: 'success', message: 'Skill updated successfully' });
+        return res.status(200).json({ status: 'success', message: 'Skill updated successfully', success: true });
     } catch (error) {
         console.error('Error updating skill:', error.message);
         return res.status(500).json({ status: 'error', message: 'Server error' });

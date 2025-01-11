@@ -54,6 +54,8 @@
                 </div>
                 <button class="but">Add class</button>
             </div>
+
+            <button class="butu">Add class</button>
             
         </div> -->
 
@@ -75,6 +77,23 @@
                 <input class="time" type="time" name="endTime" placeholder="end-time" required>
                 <input type="hidden" name="skillId" value="none" id="skillInput">
                 <button type="submit" id="addClassSubmit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Form to edit skill details  -->
+    <div id="edit" class="changename1">
+        <div class="changename" id="editInside">
+            <h2>Edit skill Details </h2>
+            <form id="editForm">
+                <p>Edit Skill Name</p>
+                <input type="text" id="skillname" placeholder="skill name" name="name">
+                <p class="para">Edit skill description</p>
+                <textarea class="inp" name="description" rows="2" cols="49" placeholder="Description"
+                    required> </textarea>
+                <input type="hidden" name="skill_id" id="editSkillId">
+
+                <button type="submit" id="editSubmit">Submit</button>
             </form>
         </div>
     </div>

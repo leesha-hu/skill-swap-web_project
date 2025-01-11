@@ -170,7 +170,8 @@ async function getClasses(sel_date, month, year) {
 
   // get container 
   const container = document.getElementById('schedule-container');
-  container.innerHTML = `Date:${sel_date}-${month}-${year}`;
+  const m = month + 1;
+  container.innerHTML = `Date:${sel_date}-${m}-${year}`;
 
   // append each teaching class 
   today.forEach(cls => {
