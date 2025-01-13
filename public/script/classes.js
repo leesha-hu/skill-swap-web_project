@@ -73,6 +73,15 @@ window.onload = async function () {
         };
         newDiv.appendChild(newbut);
 
+        // prerequisites button 
+        const pre = document.createElement("button");
+        pre.innerText = 'Prerequisites';
+        pre.classList.add('butu', 'pre');
+        pre.addEventListener("click", async () => {
+            await displayPrerequisites(element.skill_id, element.name);
+        });
+        newDiv.appendChild(pre);
+
         container.appendChild(newDiv);
 
     });
@@ -93,4 +102,48 @@ async function getSkill() {
     }
 
     return data.classes;
+}
+
+const preHead = document.getElementById('preHead'); // heading of prerequisites
+const premain = document.getElementById('premain'); // container to dynamically add prerequisites
+const prereContainer = document.getElementById("prere"); // container of prerequisites
+
+// event listener to close prerequisites container when clicked on background 
+prereContainer.onclick = (event) => {
+    if (event.target === prereContainer) {
+        prereContainer.style.display = 'none';
+    }
+};
+
+// function to display prerequisites of a skill 
+async function displayPrerequisites(skillId, skillName) {
+    const response = await fetch(`/prerequisite/${skillId}`);
+    const result = await response.json();
+
+    if (response.ok) {
+        if (result.success) {
+            const preDes = result.prerequisites;
+            preHead.innerText = `SEE PREREQUISITES OF ${skillName.toUpperCase()}`
+            premain.innerHTML = '';
+            if (preDes.length === 0) {
+                premain.innerText = result.message;
+            } else {
+                preDes.forEach(element => {
+                    const box = document.createElement('div');
+                    box.classList.add('presec');
+                    const desc = document.createElement('p');
+                    desc.innerText = element.description;
+                    box.appendChild(desc);
+
+                    premain.appendChild(box);
+                })
+
+            }
+            prereContainer.style.display = 'flex';
+        } else {
+            displayAlert(result.message, 'success', 'error');
+        }
+    } else {
+        displayAlert(result.message, 'success', 'error');
+    }
 }

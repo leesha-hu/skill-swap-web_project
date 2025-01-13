@@ -28,6 +28,9 @@ const enrollParticipant = async (req, res) => {
         return res.json({ message: 'skill added successfully', success: true });
     } catch (error) {
         console.log(error);
+        if (error.code === 'ER_DUP_ENTRY') {
+            return res.json({ message: 'You are already enrolled in this class', duplicate: error.code });
+        }
         return res.json({ message: 'Server error' });
     }
 }
