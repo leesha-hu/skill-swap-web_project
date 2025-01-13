@@ -1,16 +1,106 @@
 let b1 = document.getElementById("bt1"); // edit details button
 let d1 = document.getElementById("sh1"); // change details container
+const latitudeInput = document.getElementById("latitude");
+const longitudeInput = document.getElementById("longitude");
 b1.onclick = () => d1.style.display = 'flex'; // display change details container when clicked
 // hide container when clicked on background 
 d1.onclick = (event) => {
     if (event.target === d1) d1.style.display = 'none';
 };
 
+// Marker for selected location
+let marker;
+
+const initMap = async (lat, lng) => {
+    // Initialize the map and set a default view
+    const map = L.map("map").setView([lat, lng], 13);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+    }).addTo(map);
+
+    marker = L.marker([lat, lng]).addTo(map);
+
+    // Handle map click to update latitude and longitude
+    map.on("click", (e) => {
+        const { lat, lng } = e.latlng;
+
+        // Update the marker position
+        if (marker) {
+            marker.setLatLng([lat, lng]);
+        } else {
+            marker = L.marker([lat, lng]).addTo(map);
+        }
+
+        // Update hidden input fields
+        latitudeInput.value = lat;
+        longitudeInput.value = lng;
+    });
+}
+
+function openMap() {
+    // Check if Geolocation is available
+    if ("geolocation" in navigator) {
+        // Request location
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                let latitude = position.coords.latitude;
+                let longitude = position.coords.longitude;
+
+                // Set values in hidden fields
+                latitudeInput.value = latitude;
+                longitudeInput.value = longitude;
+
+                initMap(latitude, longitude);
+
+            },
+            (error) => {
+                // Handle geolocation errors
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        // change errorMessage class to warning
+                        displayAlert("User denied the request for Geolocation.", 'error', 'warning');
+                        break;
+
+                    case error.POSITION_UNAVAILABLE:
+                        // change errorMessage class to warning
+                        displayAlert("Location information is unavailable.", 'error', 'warning');
+                        break;
+
+                    case error.TIMEOUT:
+                        // change errorMessage class to warning
+                        displayAlert("The request to get user location timed out.", 'error', 'warning');
+                        break;
+
+                    case error.UNKNOWN_ERROR:
+                        // change errorMessage class to warning
+                        displayAlert("An unknown error occurred.", 'error', 'warning');
+                        break;
+                }
+
+                initMap(12.9716, 77.5946);
+
+            }
+        );
+    } else {
+        // If geolocation is not available, display error message
+        // change errorMessage class to warning
+        displayAlert("Geolocation is not supported by this browser.", 'error', 'warning');
+
+        initMap(12.9716, 77.5946);
+    }
+}
+openMap();
+
 // Modals for Name, Phone, Address, Password
 const openModal = (btnId, modalId) => {
     let btn = document.getElementById(btnId);
     let modal = document.getElementById(modalId);
     btn.onclick = () => modal.style.display = 'flex';
+    // if (modalId === "addr1") {
+    //     openMap();
+    // }
     modal.onclick = (event) => {
         if (event.target === modal) modal.style.display = 'none';
     };
@@ -74,10 +164,10 @@ nameForm.addEventListener("submit", async (event) => {
             if (response.ok) {
                 console.log('update successful');
                 name1.style.display = 'none';
-                
+
                 loadProfile();
                 message.textContent = 'Name successfully updated';
-                if(message.classList.contains('error')){
+                if (message.classList.contains('error')) {
                     message.classList.remove('error');
                 }
                 message.classList.add('success');
@@ -87,7 +177,7 @@ nameForm.addEventListener("submit", async (event) => {
                 console.log('update unsuccessful');
                 name1.style.display = 'none';
                 message.textContent = `Unsuccessful...${result.error}`;
-                if(message.classList.contains('success')){
+                if (message.classList.contains('success')) {
                     message.classList.remove('success');
                 }
                 message.classList.add('error');
@@ -125,7 +215,7 @@ phoneForm.addEventListener("submit", async (event) => {
                 phone1.style.display = 'none';
 
                 loadProfile();
-                if(message.classList.contains('error')){
+                if (message.classList.contains('error')) {
                     message.classList.remove('error');
                 }
                 message.textContent = 'Phone number successfully updated';
@@ -136,7 +226,7 @@ phoneForm.addEventListener("submit", async (event) => {
                 console.log('update unsuccessful');
                 phone1.style.display = 'none';
                 message.textContent = `Unsuccessful...${result.error}`;
-                if(message.classList.contains('success')){
+                if (message.classList.contains('success')) {
                     message.classList.remove('success');
                 }
                 message.classList.add('error');
@@ -172,7 +262,7 @@ addressForm.addEventListener("submit", async (event) => {
 
             loadProfile();
             message.textContent = 'Address successfully updated';
-            if(message.classList.contains('error')){
+            if (message.classList.contains('error')) {
                 message.classList.remove('error');
             }
             message.classList.add('success');
@@ -181,12 +271,12 @@ addressForm.addEventListener("submit", async (event) => {
         } else {
             console.log('update unsuccessful');
             addr1.style.display = 'none';
-                message.textContent = `Unsuccessful...${result.error}`;
-                if(message.classList.contains('success')){
-                    message.classList.remove('success');
-                }
-                message.classList.add('error');
-                message.style.display = 'block';
+            message.textContent = `Unsuccessful...${result.error}`;
+            if (message.classList.contains('success')) {
+                message.classList.remove('success');
+            }
+            message.classList.add('error');
+            message.style.display = 'block';
         }
     } catch (error) {
         console.log(error);
@@ -222,7 +312,7 @@ passwordForm.addEventListener("submit", async (event) => {
 
                 loadProfile();
                 message.textContent = 'Password successfully updated';
-                if(message.classList.contains('error')){
+                if (message.classList.contains('error')) {
                     message.classList.remove('error');
                 }
                 message.classList.add('success');
@@ -232,7 +322,7 @@ passwordForm.addEventListener("submit", async (event) => {
                 console.log('update unsuccessful');
                 pass1.style.display = 'none';
                 message.textContent = `Unsuccessful...${result.error}`;
-                if(message.classList.contains('success')){
+                if (message.classList.contains('success')) {
                     message.classList.remove('success');
                 }
                 message.classList.add('error');

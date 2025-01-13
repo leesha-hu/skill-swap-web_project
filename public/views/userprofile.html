@@ -7,6 +7,7 @@
     <title>EH - Profile</title>
     <!-- css linking  -->
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 
 <body>
@@ -76,6 +77,12 @@
                 <!-- <input type="text" placeholder="Address" required> -->
                 <textarea id="address" name="inputAddress" rows="4" cols="45"
                     placeholder="Enter your full address here..." required></textarea>
+                <!-- Hidden inputs for latitude and longitude -->
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+                <!-- map  -->
+                <p>Select your location on the map</p>
+                <div id="map"></div>
                 <button type="submit">Submit</button>
             </form>
         </div>
@@ -96,6 +103,7 @@
     </div>
 </body>
 <!-- javascript linking  -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="../script/profile.js"></script>
 
 </html>

@@ -4,6 +4,8 @@ const changeAddress = async (req, res) => {
     // get userId and new address
     const uid = req.session.userId;
     const address = req.body.inputAddress;
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
 
     // check if session details are present 
     if (!uid) {
@@ -13,7 +15,7 @@ const changeAddress = async (req, res) => {
 
     try {
         // change the address 
-        await db.query('update users set address=? where user_id=?', [address, uid]);
+        await db.query('update users set address=?,latitude=?,longitude=? where user_id=?', [address, latitude, longitude, uid]);
         return res.status(200).json({ message: 'successfully updated' });
     } catch (error) {
         console.log(error);

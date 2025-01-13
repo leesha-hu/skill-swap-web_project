@@ -119,7 +119,8 @@ header button:hover{
     background-color: rgb(103, 103, 192);
     background-color: rgb(243, 215, 181);
     width: 30%;
-    height: 60%;
+    min-height: 60%;
+    height: max-content;
 }
 
 .changename h2 {
@@ -175,4 +176,15 @@ header button:hover{
     color: red;
     background-color: rgb(248, 174, 174);
     border: 1px solid rgb(185, 91, 91);
+}
+
+/* map styling  */
+#map {
+    margin:auto;
+    height: 300px;
+    width:300px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    /* margin-bottom: 20px; */
 }
