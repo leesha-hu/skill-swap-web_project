@@ -8,7 +8,7 @@ const getPrerequisite = async (req, res) => {
     }
 
     try {
-        const [prerequisites] = await db.query('select description from prerequisites where skill_id=?', [sid]);
+        const [prerequisites] = await db.query('select p_id,description from prerequisites where skill_id=?', [sid]);
         if (prerequisites.length === 0) {
             return res.status(200).json({ success: true, message: "No prerequisites found", prerequisites: [] });
         }

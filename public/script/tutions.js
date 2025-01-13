@@ -9,6 +9,8 @@ const edit1 = document.getElementById('edit'); // edit skill form backgroud
 const editInside = document.getElementById('editInside') // edit skill form container
 const editSubmit = document.getElementById('editSubmit') // submit button for edit form
 const editForm = document.getElementById('editForm'); // edit form
+const prereContainer = document.getElementById("prere"); // container of prerequisites
+const prereSkillId = document.getElementById('prereSkillId') // skill id input of add prerequisite form
 
 let btn;
 
@@ -110,6 +112,19 @@ async function gets() {
                 container.removeChild(skillDiv);
                 await deleteSkill(element.skill_id);
             })
+
+            // prerequisites button 
+            const pre = document.createElement("button");
+            pre.innerText = 'Prerequisites';
+            pre.classList.add('butu', 'pre');
+            pre.addEventListener("click", async () => {
+                prereSkillId.value = element.skill_id;
+                await displayPrerequisites(element.skill_id,element.name);
+            });
+
+            skillDiv.appendChild(pre);
+
+
         });
     } else {
         document.getElementById("para").innerText = 'NO TUTIONS, CLICK ON ADD TUTION TO ADD YOUR CLASSES';
@@ -292,6 +307,7 @@ editSubmit.addEventListener('click', async (event) => {
     }
 })
 
+// function to delete skill 
 async function deleteSkill(skillId) {
     const response = await fetch(`/skill/${skillId}`, { method: 'DELETE' });
     const result = await response.json();
@@ -306,6 +322,105 @@ async function deleteSkill(skillId) {
         displayAlert(result.message, 'success', 'error');
     }
 }
+
+// event listener to close prerequisites container when clicked on background 
+prereContainer.onclick = (event) => {
+    if (event.target === prereContainer) {
+        prereContainer.style.display = 'none';
+    }
+};
+
+const addpre = document.getElementById("addpre"); // add prerequisite button
+const pageadd = document.getElementById("addpage"); // add prerequisite container
+// function to close add prerequisite 
+addpre.addEventListener("click", () => {
+    pageadd.style.display = 'flex';
+    pageadd.addEventListener("click", () => {
+        if (event.target === pageadd) {
+            pageadd.style.display = 'none';
+        }
+    });
+})
+
+const preHead = document.getElementById('preHead'); // heading of prerequisites
+const premain = document.getElementById('premain'); // container to dynamically add prerequisites
+
+// function to display prerequisites of a skill 
+async function displayPrerequisites(skillId,skillName) {
+    const response = await fetch(`/prerequisite/${skillId}`);
+    const result = await response.json();
+
+    if (response.ok) {
+        if (result.success) {
+            const preDes = result.prerequisites;
+            preHead.innerText=`SEE PREREQUISITES OF ${skillName.toUpperCase()}`
+            premain.innerHTML='';
+            preDes.forEach(element => {
+                const box = document.createElement('div');
+                box.classList.add('presec');
+                const desc = document.createElement('p');
+                desc.innerText = element.description;
+                const del = document.createElement('button');
+                del.classList.add('del')
+                del.innerText = 'delete';
+                del.addEventListener('click', async (event) => {
+                    const response = await fetch(`/prerequisite/${element.p_id}`, { method: "DELETE" });
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        if (result.success) {
+                            prereContainer.style.display = 'none';
+                            displayAlert(result.message, 'error', 'success');
+                        } else {
+                            displayAlert(result.message, 'success', 'error');
+                        }
+                    } else {
+                        displayAlert(result.message, 'success', 'error');
+                    }
+
+                })
+                box.appendChild(desc);
+                box.appendChild(del);
+                
+                premain.appendChild(box);
+            })
+            prereContainer.style.display = 'flex';
+        } else {
+            displayAlert(result.message, 'success', 'error');
+        }
+    } else {
+        displayAlert(result.message, 'success', 'error');
+    }
+}
+
+const prereForm = document.getElementById('prerequisiteForm');
+const prereSubmit = document.getElementById('prereSubmit');
+
+prereSubmit.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(prereForm);
+    const data = Object.fromEntries(formData.entries());
+
+    const response = await fetch(prereForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    })
+    const result = await response.json();
+
+    if (response.ok) {
+        if (result.success) {
+            pageadd.style.display = 'none';
+            prereContainer.style.display = 'none';
+            displayAlert(result.message, 'error', 'success');
+        } else {
+            displayAlert(result.message, 'error', 'success');
+        }
+    } else {
+        displayAlert(result.message, 'error', 'success');
+    }
+
+})
 
 document.addEventListener("DOMContentLoaded", function () {
     insertName();

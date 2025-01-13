@@ -56,6 +56,7 @@
             </div>
 
             <button class="butu">Add class</button>
+            <button class="butu">prequisites</button>
             
         </div> -->
 
@@ -63,13 +64,51 @@
 
     <button class="bu"><a href="../views/add_tution.html">add tution</a></button>
 
+    <!-- display prerequisites -->
+    <div id="prere" class="changename1">
+        <div class="changename">
+            <h2 id="preHead">SEE PREREQUISITES OF SKILL </h2>
+            <div class="premain" id="premain">
+                <!-- <div class="presec">
+                    <p> something 1 </p>
+                    <button class="butu2">delete</button>
+                </div>
+                <div class="presec">
+                    <p> something 1 </p>
+                    <button class="butu2">delete</button>
+                </div>
+                <div class="presec">
+                    <p> something 1 </p>
+                    <button class="butu2">delete</button>
+                </div> -->
+            </div>
+            <button id="addpre" class="changebutton">Add</button>
+
+
+        </div>
+    </div>
+
+    <!-- add prerequisites -->
+    <div id="addpage" class="changename1">
+        <div class="changename">
+            <h2>Add prerequisites</h2>
+
+            <form action="/prerequisite" id="prerequisiteForm" method='POST'>
+                <p>Enter the name of skill to be visited</p>
+                <input type="text" id="prereq" placeholder="prerequisite" name="description">
+                <input type="hidden" name="skillId" id="prereSkillId">
+                <button class="changebutton" type="submit" id="prereSubmit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
     <!-- container to add new class  -->
     <div id="addr1" class="changename1">
         <div class="changename">
             <h2>Add new Class </h2>
             <form action="/class" id="addClassForm" method="POST">
                 <p>Enter Date</p>
-                <!-- <input type="text" placeholder="Address" required> -->
                 <input type="date" id="dateInput" placeholder="date" name="date">
                 <p class="para">Enter the start time</p>
                 <input class="time" type="time" name="startTime" placeholder="start-time" required>

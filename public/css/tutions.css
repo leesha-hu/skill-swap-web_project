@@ -249,3 +249,38 @@ header h1 {
     background-color: rgb(87, 13, 37);
     color: white;   
 }
+
+.presec {
+    display: flex;
+    background-color: rgb(161, 247, 247);
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 5px;
+    margin: 5px 8px;   
+    min-width: max-content;
+}
+
+.premain button {
+    background-color: rgb(87, 13, 37);
+    height: 20px;
+    width: 65px;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:inherit;
+}
+
+.premain {
+    min-height: 60%;
+    max-height: max-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(177, 95, 95);
+}
+
+#addpre{
+    background-color:rgb(87, 13, 37) ;
+}
