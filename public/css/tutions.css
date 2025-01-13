@@ -284,3 +284,11 @@ header h1 {
 #addpre{
     background-color:rgb(87, 13, 37) ;
 }
+
+.divbutt{
+    height: max-content;
+    width:95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

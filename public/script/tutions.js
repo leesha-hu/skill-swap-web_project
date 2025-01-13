@@ -71,12 +71,14 @@ async function gets() {
 
 
             }
+            const btnCont=document.createElement('div');
+            btnCont.classList.add('divbutt');
 
             // button to add class timings 
             const addcls = document.createElement("button");
             addcls.innerText = 'Add Class';
-            addcls.classList.add('but');
-            skillDiv.appendChild(addcls);
+            addcls.classList.add('butu');
+            btnCont.appendChild(addcls);
             // event listener to add class button 
             addcls.addEventListener("click", (event) => {
                 skillInput = document.getElementById('skillInput');
@@ -96,7 +98,7 @@ async function gets() {
             edit.classList.add('butu', 'edit');
             edit.innerText = 'edit skill';
             const edit1 = document.getElementById("edit");
-            skillDiv.appendChild(edit);
+            btnCont.appendChild(edit);
             edit.addEventListener("click", () => {
                 edit1.style.display = 'flex';
                 const editSkillId = document.getElementById('editSkillId');
@@ -107,7 +109,7 @@ async function gets() {
             const dlt = document.createElement("button");
             dlt.classList.add('butu', 'dlt');
             dlt.innerText = 'delete skill';
-            skillDiv.appendChild(dlt);
+            btnCont.appendChild(dlt);
             dlt.addEventListener("click", async () => {
                 container.removeChild(skillDiv);
                 await deleteSkill(element.skill_id);
@@ -122,7 +124,8 @@ async function gets() {
                 await displayPrerequisites(element.skill_id,element.name);
             });
 
-            skillDiv.appendChild(pre);
+            btnCont.appendChild(pre);
+            skillDiv.appendChild(btnCont);
 
 
         });
