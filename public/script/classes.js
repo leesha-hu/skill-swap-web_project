@@ -35,12 +35,25 @@ window.onload = async function () {
         newP.innerText = `Teacher: ${element.teacher}`;
         newDiv.appendChild(newP);
 
+        const newP4 = document.createElement("p");
+        newP4.innerText = `Phone No.: ${element.phone}`;
+        newDiv.appendChild(newP4);
+
         const newP1 = document.createElement("p");
         newP1.innerText = `Timings: ${element.start_time} - ${element.end_time}`;
         newDiv.appendChild(newP1);
 
+        const dateObj = new Date(element.date);
+        // Extract date, month, and year
+        const day = String(dateObj.getUTCDate()).padStart(2, '0'); // Ensures 2 digits
+        const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const year = dateObj.getUTCFullYear();
+
+        // Combine in dd-mm-yyyy format
+        const formattedDate = `${day}-${month}-${year}`;
+
         const newP3 = document.createElement("p");
-        newP3.innerText = `Date: ${element.date}`;
+        newP3.innerText = `Date: ${formattedDate}`;
         newDiv.appendChild(newP3);
 
         const newP2 = document.createElement("p");

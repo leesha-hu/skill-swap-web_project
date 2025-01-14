@@ -104,13 +104,16 @@ async function gets() {
 
         // display each skill 
         classes.forEach((element, index) => {
+            const d = Number(element.distance).toFixed(3);
             const skillDiv = document.createElement('div');
             skillDiv.classList.add("sub");
             skillDiv.innerHTML = `
                 <h2>Skill Name: ${element.skill_name}</h2>
-                <p>Teacher:${element.user_name}</p>
+                <p>Teacher: ${element.user_name}</p>
+                <p>Phone No.: ${element.phone}</p>
                 <p>Tution Center: ${element.address}</p>
-                <p>Description:${element.description}</p>
+                <p>Distance: ${d}km</p>
+                <p>Description: ${element.description}</p>
                 <div class="timings"></div>
             `;
 

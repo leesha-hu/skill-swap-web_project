@@ -110,14 +110,14 @@ async function renderCalendar() {
     // extract the classes the user is teaching today 
     const today = classes.filter((cls) => {
       const classDate = new Date(cls.date);
-      return classDate.getDate() === day && classDate.getMonth() === month;
+      return classDate.getUTCDate() === day && classDate.getUTCMonth() === month;
 
     })
 
     // extract the classes the user is participating today 
     const ptoday = participating.filter((cls) => {
       const classDate = new Date(cls.date);
-      return classDate.getDate() === day && classDate.getMonth() === month;
+      return classDate.getUTCDate() === day && classDate.getUTCMonth() === month;
 
     })
 
@@ -159,13 +159,13 @@ async function getClasses(sel_date, month, year) {
   // filter teaching classes 
   const today = teach.filter(cls => {
     const date = new Date(cls.date);
-    return date.getDate() === sel_date && date.getMonth() === month && date.getFullYear() === year;
+    return date.getUTCDate() === sel_date && date.getUTCMonth() === month && date.getUTCFullYear() === year;
   })
 
   // filter participating classes 
   const ptoday = learn.filter(cls => {
     const date = new Date(cls.date);
-    return date.getDate() === sel_date && date.getMonth() === month && date.getFullYear() === year;
+    return date.getUTCDate() === sel_date && date.getUTCMonth() === month && date.getUTCFullYear() === year;
   })
 
   // get container 

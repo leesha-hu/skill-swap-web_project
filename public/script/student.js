@@ -4,6 +4,7 @@ const classId = urlParams.get('classId');
 const name = urlParams.get('skillName');
 
 const insName = document.getElementById('insertName'); // div to insert name
+const pa = document.getElementById("list"); // div to display no. of students
 
 // function to insert user name to div 
 async function insertName() {
@@ -27,6 +28,8 @@ window.onload = async function () {
     const con = document.getElementsByClassName("tolearn")[0];
     if (arr != undefined) {
         if (arr.length > 0) {
+            // display No. of students 
+            pa.innerText = `No. of students enrolled: ${arr.length}`
             // add each participant info 
             arr.forEach(element => {
                 const newd1 = document.createElement('div');
@@ -34,6 +37,9 @@ window.onload = async function () {
                 const newh1 = document.createElement("h2");
                 newh1.innerText = element.name;
                 newd1.appendChild(newh1);
+                const newp2 = document.createElement("p");
+                newp2.innerText = `Phone No. : ${element.phone}`;
+                newd1.appendChild(newp2);
                 const newp1 = document.createElement("p");
                 newp1.innerText = `Address : ${element.address}`;
                 newd1.appendChild(newp1);
@@ -43,7 +49,7 @@ window.onload = async function () {
         }
         else {
             // display no participants
-            const pa = document.getElementById("list");
+
             pa.innerText = 'You do not have any students attending your class';
         }
     }
