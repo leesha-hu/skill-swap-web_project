@@ -292,3 +292,13 @@ header h1 {
     justify-content: center;
     align-items: center;
 }
+
+.presec p{
+    min-width:50%;
+    max-width: max-content;
+}
+
+.butu{
+    width:max-content;
+    margin:4px;
+}
